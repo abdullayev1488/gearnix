@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { IconMenu2 } from "@tabler/icons-react";
 import { NavLink } from "react-router-dom";
 import { navLinks, navIcons } from "../../const";
-import { Basket } from "../ui/drawer/Basket";
-import { Wishlist } from "../ui/drawer/Wishlist";
-import { MobileMenu } from "../ui/drawer/MobileMenu";
+import { Basket } from "../ui/drawer/Basket.jsx";
+import { Wishlist } from "../ui/drawer/Wishlist.jsx";
+import { MobileMenu } from "../ui/drawer/MobileMenu.jsx";
 import { AuthModal } from "../ui/modals/AuthModal";
 import { SearchModal } from "../ui/modals/SearchModal";
 import { QuickViewModal } from "../ui/modals/QuickViewModal";
@@ -93,11 +93,11 @@ export const Header = () => {
             ))}
           </div>
         </div>
-        <MobileMenu open={mobileMenuOpen} setOpen={(val) => dispatch(setMobileMenuOpen(val))} />
+        <MobileMenu />
       </nav>
 
-      <Basket isOpen={basketOpen} setIsOpen={(val) => dispatch(setBasketOpen(val))} />
-      <Wishlist isOpen={wishlistOpen} setIsOpen={(val) => dispatch(setWishlistOpen(val))} />
+      <Basket />
+      <Wishlist />
       <AuthModal isOpen={authOpen} onClose={() => dispatch(setAuthOpen(false))} />
       <SearchModal isOpen={searchOpen} onClose={() => dispatch(setSearchOpen(false))} />
       <QuickViewModal isOpen={quickViewOpen} onClose={() => dispatch(setQuickViewOpen(false))} />
