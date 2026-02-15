@@ -1,46 +1,39 @@
-import React, { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { IconLayoutGrid, IconList, IconAdjustmentsHorizontal, IconStar } from '@tabler/icons-react';
 import { FilterSidebar } from '../../components/ui/aside/FilterSidebar';
 import { ProductCard } from '../../components/ui/cards/ProductCard';
-import { products } from '../../const';
+import { products, sortOptions } from '../../const';
 import { setSortBy, setViewType } from '../../redux/slice/filterSlice';
 
 export const ShopContent = () => {
     const dispatch = useDispatch();
-    const { filters, sortBy, viewType } = useSelector((state) => state.filter);
-    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = React.useState(false);
-    const [isSortOpen, setIsSortOpen] = React.useState(false);
-    const [visibleCount, setVisibleCount] = React.useState(9);
+    const { filters, sortBy, viewType } = useSelector(state => state.filter);
+    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+    const [isSortOpen, setIsSortOpen] = useState(false);
+    const [visibleCount, setVisibleCount] = useState(9);
 
     // Reset visible count when filters change
-    React.useEffect(() => {
+    useEffect(() => {
         setVisibleCount(9);
     }, [filters, sortBy]);
 
-    const sortOptions = [
-        { label: 'Default sorting', value: 'default' },
-        { label: 'Sort by popularity', value: 'popularity' },
-        { label: 'Sort by average rating', value: 'rating' },
-        { label: 'Sort by latest', value: 'latest' },
-        { label: 'Sort by price: low to high', value: 'price-low' },
-        { label: 'Sort by price: high to low', value: 'price-high' },
-    ];
+
 
     const filteredProducts = useMemo(() => {
         let result = [...products];
 
         // Filter by category
         if (filters.category) {
-            result = result.filter(p => p.category === filters.category);
+            result = result.filter(product => product.category === filters.category);
         }
 
         // Filter by price
-        result = result.filter(p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]);
+        result = result.filter(product => product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]);
 
         // Filter by brands
         if (filters.brands.length > 0) {
-            result = result.filter(p => filters.brands.includes(p.brand));
+            result = result.filter(product => filters.brands.includes(product.brand));
         }
 
         // Sorting

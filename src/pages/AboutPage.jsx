@@ -7,6 +7,7 @@ import { StoresSection } from "../sections/about/StoresSection"
 import { TeamSection } from "../sections/about/TeamSection"
 
 export const AboutPage = () => {
+
     const breadcrumbs = [
         { label: "Home", path: "/" },
         { label: "About Us", path: null }

@@ -1,18 +1,13 @@
 import { useState } from 'react'
 import { ProductCard } from '../../components/ui/cards/ProductCard'
-import { products } from '../../const'
+import { products, categories } from '../../const'
 
 export const ArrivalsSection = () => {
     const [activeTab, setActiveTab] = useState(1);
 
     const displayProducts = products.slice(0, 5);
 
-    const categories = [
-        { id: 1, name: "Gaming Mouse" },
-        { id: 2, name: "Keyboards" },
-        { id: 3, name: "Gaming Controllers" },
-        { id: 4, name: "Headphones" }
-    ];
+
 
     return (
         <section className='py-16 max-w-screen-2xl mx-auto px-4'>
@@ -21,14 +16,14 @@ export const ArrivalsSection = () => {
                     New Arrivals
                 </h2>
                 <ul className="flex items-center gap-6 lg:gap-10 overflow-x-auto pb-2 lg:pb-0 scrollbar-hide shrink-0">
-                    {categories.map((cat) => (
+                    {categories.slice(0, 4).map((category) => (
                         <li
-                            key={cat.id}
-                            onClick={() => setActiveTab(cat.id)}
+                            key={category.id}
+                            onClick={() => setActiveTab(category.id)}
                             className={`text-[14px] lg:text-[16px] font-[600] uppercase cursor-pointer transition-colors whitespace-nowrap
-                                ${activeTab === cat.id ? 'text-black border-b-2 border-[#ff512f] pb-1' : 'text-[#b0b0b0] hover:text-black'}`}
+                                ${activeTab === category.id ? 'text-black border-b-2 border-[#ff512f] pb-1' : 'text-[#b0b0b0] hover:text-black'}`}
                         >
-                            {cat.name}
+                            {category.name}
                         </li>
                     ))}
                 </ul>

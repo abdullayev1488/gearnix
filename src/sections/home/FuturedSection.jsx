@@ -18,7 +18,7 @@ export const FuturedSection = () => {
 
     // Handle ESC key
     useEffect(() => {
-        const handleEsc = (e) => {
+        const handleEsc = e => {
             if (e.key === 'Escape') setIsModalOpen(false);
         };
         window.addEventListener('keydown', handleEsc);

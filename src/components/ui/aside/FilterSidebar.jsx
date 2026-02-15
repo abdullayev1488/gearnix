@@ -1,41 +1,24 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { IconChevronDown, IconChevronUp, IconStarFilled, IconStar } from '@tabler/icons-react';
+import { categories, brands } from '@/const';
 import {
     setCategory,
-    setPriceRange,
     toggleBrand,
-    setRating,
     toggleColor
 } from '../../../redux/slice/filterSlice';
 import { SliderRange } from '@/components/custom/RangeSlider';
 
 export const FilterSidebar = () => {
     const dispatch = useDispatch();
-    const { filters } = useSelector((state) => state.filter);
-
-    // Mock data for filters
-    const categories = [
-        { name: 'Headphones', count: 7 },
-        { name: 'Accessories', count: 13 },
-        { name: 'Gaming controllers', count: 6 },
-        { name: 'Gaming Mouse', count: 10 },
-        { name: 'Keyboards', count: 9 },
-        { name: 'Wireless headset', count: 5 },
-    ];
-
-    const brands = [
-        { name: 'Abler', count: 4 },
-        { name: 'Apple', count: 12 },
-        { name: 'Logitech', count: 7 },
-        { name: 'Razer', count: 10 },
-        { name: 'Sony', count: 6 },
-        { name: 'Sony', count: 6 },
-    ];
-
-    const colors = [
+    const { filters } = useSelector(state => state.filter);
+    
+    const productColors = [
         '#1a202c', '#4a5568', '#48bb78', '#4299e1', '#9f7aea', '#ed64a6', '#f56565', '#ed8936', '#cbd5e0', '#ffffff'
     ];
+
+ 
+
 
     const FilterSection = ({ title, children, defaultOpen = true }) => {
         const [isOpen, setIsOpen] = React.useState(defaultOpen);
@@ -85,7 +68,7 @@ export const FilterSidebar = () => {
                 {/* Price */}
                 <FilterSection title="Price">
                     <div className="px-1 mt-6">
-                        <SliderRange/>
+                        <SliderRange />
                         <div className="flex items-center justify-between mt-6">
                             <div className="flex flex-col gap-1">
                                 <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">$0.00</span>
@@ -127,7 +110,7 @@ export const FilterSidebar = () => {
                 {/* Colors */}
                 <FilterSection title="Colors">
                     <div className="flex flex-wrap gap-4 p-2 mt-2">
-                        {colors.map((color) => (
+                        {productColors.map((color) => (
                             <button
                                 key={color}
                                 onClick={() => dispatch(toggleColor(color))}

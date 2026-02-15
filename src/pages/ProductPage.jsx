@@ -1,6 +1,7 @@
 import { TopSection } from "../sections/TopSection"
 import { ProductDetailsSection } from "../sections/product/ProductDetailsSection"
 import { ProductTabsSection } from "../sections/product/ProductTabsSection"
+import { RelatedProductsSection } from "../sections/product/RelatedProductsSection"
 
 export const ProductPage = () => {
     const breadcrumbs = [
@@ -12,6 +13,7 @@ export const ProductPage = () => {
             <TopSection title="Product" breadcrumbs={breadcrumbs} />
             <ProductDetailsSection />
             <ProductTabsSection />
+            <RelatedProductsSection />
         </main>
     )
 }

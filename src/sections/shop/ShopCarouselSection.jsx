@@ -6,40 +6,9 @@ import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { categories } from '../../const';
 
 export const ShopCarouselSection = () => {
-    const categories = [
-        {
-            id: 1,
-            title: "Accessories",
-            count: "13 Products",
-            image: "/img/ShopPageCarouselimg1.webp"
-        },
-        {
-            id: 2,
-            title: "Gaming controllers",
-            count: "6 Products",
-            image: "/img/ShopPageCarouselimg2.webp"
-        },
-        {
-            id: 3,
-            title: "Gaming Mouse",
-            count: "10 Products",
-            image: "/img/ShopPageCarouselimg3.webp"
-        },
-        {
-            id: 4,
-            title: "Keyboards",
-            count: "9 Products",
-            image: "/img/ShopPageCarouselimg4.webp"
-        },
-        {
-            id: 5,
-            title: "Headsets",
-            count: "15 Products",
-            image: "/img/ShopPageCarouselimg5.webp"
-        }
-    ];
 
     return (
         <section className="relative pb-12 md:pb-20 top-[-60px] overflow-x-hidden">
@@ -78,23 +47,23 @@ export const ShopCarouselSection = () => {
                     }}
                     className="category-swiper"
                 >
-                    {categories.map(cat => (
-                        <SwiperSlide key={cat.id}>
+                    {categories.map(category => (
+                        <SwiperSlide key={category.id}>
                             <div className="flex flex-col items-center group cursor-pointer">
                                 {/* Circular Image Container */}
                                 <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden bg-gray-50 mb-6 border-4 border-transparent group-hover:border-[#ff512f]/10 transition-all duration-300 shadow-md">
                                     <img
-                                        src={cat.image}
-                                        alt={cat.title}
+                                        src={category.images.shop}
+                                        alt={category.name}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
                                 </div>
                                 {/* Text Content */}
                                 <h3 className="font-orbitron !text-[14px] font-bold text-[#1A1A1A] mb-1 uppercase tracking-tight">
-                                    {cat.title}
+                                    {category.name}
                                 </h3>
                                 <p className="text-[12px] text-[#888] font-medium uppercase tracking-wider">
-                                    {cat.count}
+                                    {category.count}
                                 </p>
                             </div>
                         </SwiperSlide>

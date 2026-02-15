@@ -61,23 +61,71 @@ export const colors = [
 ]
 
 export const categories = [
+
   {
-    name: "Keyboards Gaming",
-    image: "/img/img-2-1.png",
+    id: 1,
+    name: "Gaming Keyboards",
+    count: "9 Products",
+    images: {
+      shop: "/img/ShopPageCarouselimg5.webp",
+      home: "/img/img-2-1.png",
+    },
   },
   {
+    id: 2,
     name: "Gaming Mouse",
-    image: "/img/img-2-2.png",
+    count: "10 Products",
+    images: {
+      shop: "/img/ShopPageCarouselimg4.webp",
+      home: "/img/img-2-2.png",
+    },
   },
   {
+    id: 3,
     name: "Headset Gaming",
-    image: "/img/img-2-3.png",
+    count: "15 Products",
+    images: {
+      shop: "/img/ShopPageCarouselimg1.webp",
+      home: "/img/img-2-3.png",
+    },
   },
   {
+    id: 4,
     name: "Gaming Controllers",
-    image: "/img/img-2-4.png",
+    count: "6 Products",
+    images: {
+      shop: "/img/ShopPageCarouselimg3.webp",
+      home: "/img/img-2-4.png",
+    },
   },
-]
+  {
+    id: 5,
+    name: "Accessories",
+    count: "13 Products",
+    images: {
+      shop: "/img/ShopPageCarouselimg2.webp",
+    },
+  },
+
+
+  {
+    id: 6,
+    name: "Wireless headset",
+    count: "5 Products",
+    images: {
+      shop: "/img/ShopPageCarouselimg6.webp",
+    },
+  },
+];
+
+export const brands = [
+  { name: 'Abler', count: 4 },
+  { name: 'Apple', count: 12 },
+  { name: 'Logitech', count: 7 },
+  { name: 'Razer', count: 10 },
+  { name: 'Sony', count: 6 },
+  { name: 'Sony', count: 6 },
+];
 
 export const collections = [
   {
@@ -508,4 +556,13 @@ export const contactSocials = [
     path: "https://www.youtube.com/",
     color: "bg-gradient-to-r from-[#b851f5] to-[#f551b8]",
   },
+];
+
+export const sortOptions = [
+  { label: 'Default sorting', value: 'default' },
+  { label: 'Sort by popularity', value: 'popularity' },
+  { label: 'Sort by average rating', value: 'rating' },
+  { label: 'Sort by latest', value: 'latest' },
+  { label: 'Sort by price: low to high', value: 'price-low' },
+  { label: 'Sort by price: high to low', value: 'price-high' },
 ];

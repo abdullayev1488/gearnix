@@ -22,7 +22,7 @@ export const ProductReviewsTab = ({ productName = "IMMERSION XTREME PRO" }) => {
 
             {/* Rating Section */}
             <div className="space-y-3">
-                <label className="text-[15px] font-bold text-gray-900">Your rating *</label>
+                <label className="text-[15px] font-bold text-gray-900">Your rating </label>
                 <div className="flex gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
                         <button
@@ -32,8 +32,8 @@ export const ProductReviewsTab = ({ productName = "IMMERSION XTREME PRO" }) => {
                             onMouseEnter={() => setHover(star)}
                             onMouseLeave={() => setHover(rating)}
                         >
-                            <IconStar
-                                size={18}
+                            <IconStar className='text-[#ffb800] mt-[5px]'
+                                size={19}
                                 fill={(hover || rating) >= star ? "#ffb800" : "none"}
                                 stroke={(hover || rating) >= star ? "#ffb800" : "#d1d5db"}
                                 strokeWidth={2}
