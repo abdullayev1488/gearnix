@@ -6,9 +6,20 @@ import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { categories } from '../../const';
+import { useEffect } from 'react';
+import { useState } from 'react';
+
 
 export const ShopCarouselSection = () => {
+
+    const [categories, setCategories] = useState([])
+
+    useEffect(() => {
+        fetch("http://localhost:3000/category/all")
+            .then(res => res.json())
+            .then(data => setCategories(data.data))
+    }
+        , [])
 
     return (
         <section className="relative pb-12 md:pb-20 top-[-60px] overflow-x-hidden">
@@ -63,7 +74,7 @@ export const ShopCarouselSection = () => {
                                     {category.name}
                                 </h3>
                                 <p className="text-[12px] text-[#888] font-medium uppercase tracking-wider">
-                                    {category.count}
+                                    Product (20)
                                 </p>
                             </div>
                         </SwiperSlide>
