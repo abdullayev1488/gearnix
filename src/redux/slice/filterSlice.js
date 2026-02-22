@@ -9,7 +9,7 @@ const initialState = {
         colors: [],
     },
     sortBy: 'default',
-    viewType: 'grid-3', // 'grid-3', 'grid-2' or 'list'
+    viewType: 'grid-3',
 };
 
 const filterSlice = createSlice({

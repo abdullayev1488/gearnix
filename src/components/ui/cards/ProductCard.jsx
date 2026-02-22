@@ -1,5 +1,5 @@
 import { IconStar, IconStarFilled, IconEye, IconArrowsExchange, IconShoppingCart } from '@tabler/icons-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { setBasketOpen, setQuickViewOpen, setSelectedProduct } from '../../../redux/slice/uiSlice';
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 export const TopSection = ({ title, breadcrumbs }) => {
     return (
         <section className='pt-25 pb-100 bg-size-[1400px] overflow-hidden bg-[#f6f6f6] bg-no-repeat text-center' style={{ backgroundImage: 'url("/img/coccik.png")', backgroundPosition: 'center 45%' }} >

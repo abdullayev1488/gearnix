@@ -1,6 +1,6 @@
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router'
 import { useEffect } from 'react'
 
 export const MainLayout = () => {

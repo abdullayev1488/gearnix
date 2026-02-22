@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IconMenu2 } from "@tabler/icons-react";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import { navLinks, navIcons } from "../../const";
 import { Basket } from "../ui/drawer/Basket.jsx";
 import { Wishlist } from "../ui/drawer/Wishlist.jsx";

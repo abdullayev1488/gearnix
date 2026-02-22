@@ -1,17 +1,16 @@
-import { TopSection } from "../sections/TopSection"
 import { IconPlus, IconMinus, IconTrash, IconTruck, IconChevronRight } from "@tabler/icons-react";
+import { Link } from "react-router";
 
 export const BasketPage = () => {
-    const breadcrumbs = [
-        { label: "Home", path: "/" },
-        { label: "Basket", path: null }
-    ]
     return (
         <main className='pt-[80px]'>
-            <TopSection title="Basket" breadcrumbs={breadcrumbs} />
-
             <section className="py-12 md:py-24 bg-white">
                 <div className="max-w-screen-2xl mx-auto px-4">
+                    <div className="flex items-center gap-2 text-[15px] text-gray-400 mb-8">
+                        <Link to="/" className="hover:text-gray-900 hover:font-semibold cursor-pointer transition-colors">Home</Link>
+                        <span className="text-gray-300">/</span>
+                        <Link to="/shop" className="text-gray-900 font-semibold">Basket</Link>
+                    </div>
                     <div className="flex align-center flex-col lg:flex-row gap-8 lg:gap-12 items-start">
                         {/* Basket Left */}
                         <div className="flex-[2] w-full">

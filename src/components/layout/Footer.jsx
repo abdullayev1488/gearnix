@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { socials, footerLinks } from "../../const";
 import { ScrolTop } from "../custom/ScrolTop";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export const Footer = () => {
   const [showScroll, setShowScroll] = useState(false);
