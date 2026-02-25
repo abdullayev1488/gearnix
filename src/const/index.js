@@ -119,12 +119,36 @@ export const categories = [
 ];
 
 export const brands = [
-  { name: 'Abler', count: 4 },
-  { name: 'Apple', count: 12 },
-  { name: 'Logitech', count: 7 },
-  { name: 'Razer', count: 10 },
-  { name: 'Sony', count: 6 },
-  { name: 'Sony', count: 6 },
+  {
+    name: "Razer",
+    count: 4,
+    image: "/img/brands/razer-logo.png"
+  },
+  {
+    name: "Logitech",
+    count: 12,
+    image: "/img/brands/logitech-logo.png"
+  },
+  {
+    name: "SteelSeries",
+    count: 7,
+    image: "/img/brands/steelseries-logo.png"
+  },
+  {
+    name: "HyperX",
+    count: 10,
+    image: "/img/brands/hyperx-logo.png"
+  },
+  {
+    name: "Corsair",
+    count: 6,
+    image: "/img/brands/corsair-logo.png"
+  },
+  {
+    name: "Redragon",
+    count: 6,
+    image: "/img/brands/redragon-logo.png"
+  },
 ];
 
 export const collections = [

@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import api from '../../axios/axios';
 
 
 export const ShopCarouselSection = () => {
@@ -15,11 +16,10 @@ export const ShopCarouselSection = () => {
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:3000/category/all")
-            .then(res => res.json())
-            .then(data => setCategories(data.data))
-    }
-        , [])
+        api.get("/category")
+            .then(res => setCategories(res.data.data))
+            .catch(err => console.error("Failed to fetch categories:", err))
+    }, [])
 
     return (
         <section className="relative pb-12 md:pb-20 top-[-60px] overflow-x-hidden">
