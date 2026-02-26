@@ -1,14 +1,32 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { IconX, IconStarFilled, IconStar, IconPlus, IconMinus, IconShoppingCart, IconArrowsExchange } from '@tabler/icons-react';
+import { addItem } from '@/redux/slice/basketSlice';
+import { toggleWishlist } from '@/redux/slice/wishlistSlice';
+import { toggleCompare } from '@/redux/slice/compareSlice';
+import { setCompareModalOpen } from '@/redux/slice/uiSlice';
 
 export const QuickViewModal = ({ isOpen, onClose }) => {
+    const dispatch = useDispatch();
     const { selectedProduct } = useSelector((state) => state.ui);
+    const wishlistItems = useSelector(state => state.wishlist.items);
+    const compareItems = useSelector(state => state.compare.items);
+
+    const [quantity, setQuantity] = useState(1);
 
     if (!selectedProduct) return null;
 
+    const isInWishlist = wishlistItems.some(item => item._id === selectedProduct._id);
+    const isInCompare = compareItems.some(item => item._id === selectedProduct._id);
+
     const handleClose = () => {
+        setQuantity(1);
         onClose();
+    };
+
+    const handleAddToBasket = () => {
+        dispatch(addItem({ product: selectedProduct, quantity }));
+        handleClose();
     };
 
     return (
@@ -38,9 +56,9 @@ export const QuickViewModal = ({ isOpen, onClose }) => {
                             alt={selectedProduct.name}
                             className="w-full max-h-[400px] object-contain transition-transform duration-700 hover:scale-110"
                         />
-                        {selectedProduct.discount && (
+                        {(selectedProduct.discount || selectedProduct.badge) && (
                             <span className="absolute top-6 left-6 px-4 py-1.5 bg-[#ff512f] text-white text-[12px] font-bold rounded-full shadow-lg">
-                                {selectedProduct.discount}
+                                {selectedProduct.discount || selectedProduct.badge}
                             </span>
                         )}
                     </div>
@@ -48,7 +66,7 @@ export const QuickViewModal = ({ isOpen, onClose }) => {
                     {/* Right Side: Info */}
                     <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
                         <p className="text-[#ff512f] font-bold text-[13px] uppercase tracking-widest mb-3">
-                            {selectedProduct.category || "Gaming Gear"}
+                            {selectedProduct.category?.name || "Gaming Gear"}
                         </p>
                         <h2 className="font-orbitron font-bold text-2xl md:text-3xl text-gray-900 mb-4 leading-tight">
                             {selectedProduct.name}
@@ -84,28 +102,48 @@ export const QuickViewModal = ({ isOpen, onClose }) => {
                         {/* Actions */}
                         <div className="flex flex-col sm:flex-row gap-4">
                             <div className="flex items-center border-2 border-gray-100 rounded-2xl p-1 bg-gray-50/50">
-                                <button className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white rounded-xl transition-all cursor-pointer">
+                                <button
+                                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                    className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white rounded-xl transition-all cursor-pointer"
+                                >
                                     <IconMinus size={16} />
                                 </button>
-                                <span className="w-12 text-center font-bold text-gray-900">1</span>
-                                <button className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white rounded-xl transition-all cursor-pointer">
+                                <span className="w-12 text-center font-bold text-gray-900">{quantity}</span>
+                                <button
+                                    onClick={() => setQuantity(quantity + 1)}
+                                    className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white rounded-xl transition-all cursor-pointer"
+                                >
                                     <IconPlus size={16} />
                                 </button>
                             </div>
-                            <button className="flex-1 bg-gradient-to-r from-[#ff512f] to-[#dd2476] text-white font-orbitron font-bold py-2 px-8 rounded-2xl flex items-center justify-center gap-3 hover:shadow-[0_10px_20px_rgba(255,81,47,0.3)] transition-all transform hover:-translate-y-1 cursor-pointer active:scale-95">
+                            <button
+                                onClick={handleAddToBasket}
+                                className="flex-1 bg-gradient-to-r from-[#ff512f] to-[#dd2476] text-white font-orbitron font-bold py-2 px-8 rounded-2xl flex items-center justify-center gap-3 hover:shadow-[0_10px_20px_rgba(255,81,47,0.3)] transition-all transform hover:-translate-y-1 cursor-pointer active:scale-95"
+                            >
                                 <IconShoppingCart size={20} />
-                                ADD TO CART
+                                ADD TO BASKET
                             </button>
                         </div>
 
                         <div className="mt-8 pt-8 border-t border-gray-100 flex items-center gap-6">
-                            <button className="flex items-center gap-2 text-gray-500 hover:text-[#ff512f] transition-colors cursor-pointer group">
-                                <IconStar size={18} className="group-hover:fill-[#ff512f]" />
-                                <span className="text-[13px] font-semibold">Add to Wishlist</span>
+                            <button
+                                onClick={() => dispatch(toggleWishlist(selectedProduct))}
+                                className={`flex items-center gap-2 transition-colors cursor-pointer group ${isInWishlist ? 'text-[#ff512f]' : 'text-gray-500 hover:text-[#ff512f]'}`}
+                            >
+                                {isInWishlist ? <IconStarFilled size={18} /> : <IconStar size={18} className="group-hover:fill-[#ff512f]" />}
+                                <span className="text-[13px] font-semibold">{isInWishlist ? 'In Wishlist' : 'Add to Wishlist'}</span>
                             </button>
-                            <button className="flex items-center gap-2 text-gray-500 hover:text-[#ff512f] transition-colors cursor-pointer group">
+                            <button
+                                onClick={() => {
+                                    dispatch(toggleCompare(selectedProduct));
+                                    if (!isInCompare && compareItems.length === 1) {
+                                        dispatch(setCompareModalOpen(true));
+                                    }
+                                }}
+                                className={`flex items-center gap-2 transition-colors cursor-pointer group ${isInCompare ? 'text-[#ff512f]' : 'text-gray-500 hover:text-[#ff512f]'}`}
+                            >
                                 <IconArrowsExchange size={18} />
-                                <span className="text-[13px] font-semibold">Compare</span>
+                                <span className="text-[13px] font-semibold">{isInCompare ? 'In Compare' : 'Compare'}</span>
                             </button>
                         </div>
                     </div>

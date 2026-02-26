@@ -1,8 +1,8 @@
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { useRef } from 'react';
-import { products } from '../../../const';
+import { useRef, useState, useEffect } from 'react';
+import api from '../../../axios/axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ProductCard } from '../cards/ProductCard';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -11,6 +11,24 @@ import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 export const ProductCarousel = () => {
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const res = await api.get('/product', { params: { status: 'active', limit: 20 } });
+                setProducts(res.data.data?.products || []);
+            } catch (error) {
+                console.error('Failed to fetch products', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProducts();
+    }, []);
+
+    if (loading) return null;
 
     return (
         <section className="py-20 max-w-screen-2xl mx-auto px-4 overflow-hidden relative">
@@ -45,7 +63,7 @@ export const ProductCarousel = () => {
             <Swiper
                 slidesPerView={1}
                 spaceBetween={20}
-                loop={true}
+                loop={products.length > 5}
                 pagination={{
                     clickable: true,
                     el: '.custom-pagination',
@@ -66,7 +84,7 @@ export const ProductCarousel = () => {
                 className="product-swiper !overflow-visible"
             >
                 {products.map((product, index) => (
-                    <SwiperSlide key={`${product.id}-${index}`} className="pb-4">
+                    <SwiperSlide key={`${product._id}-${index}`} className="pb-4">
                         <ProductCard product={product} />
                     </SwiperSlide>
                 ))}

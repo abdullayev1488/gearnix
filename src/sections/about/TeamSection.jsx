@@ -1,4 +1,4 @@
-import { TeamCarousel } from "../../components/ui/carousels/TeamCarousel"
+import { TeamCarousel } from "@/components/ui/carousels/TeamCarousel"
 
 export const TeamSection = () => {
     return (

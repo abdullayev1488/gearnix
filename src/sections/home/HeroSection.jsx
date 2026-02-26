@@ -1,4 +1,4 @@
-import { Button } from "../../components/custom/Button"
+import { Button } from "@/components/custom/Button"
 
 export const HeroSection = () => {
 

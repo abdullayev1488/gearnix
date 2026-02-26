@@ -1,4 +1,4 @@
-import { NewsCard } from '../../components/ui/cards/NewsCard'
+import { NewsCard } from '@/components/ui/cards/NewsCard'
 
 export const NewsSection = () => {
 

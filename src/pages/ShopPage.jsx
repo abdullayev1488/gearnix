@@ -1,6 +1,6 @@
-import { TopSection } from "../sections/TopSection";
-import { ShopCarouselSection } from "../sections/shop/ShopCarouselSection";
-import { ShopContent } from "../sections/shop/ShopContent";
+import { TopSection } from "@/sections/TopSection";
+import { ShopCarouselSection } from "@/sections/shop/ShopCarouselSection";
+import { ShopContent } from "@/sections/shop/ShopContent";
 
 export const ShopPage = () => {
     const breadcrumbs = [

@@ -1,6 +1,8 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     IconStar,
+    IconStarFilled,
     IconMinus,
     IconPlus,
     IconCheck,
@@ -10,8 +12,25 @@ import {
     IconTruck,
     IconClock
 } from '@tabler/icons-react';
+import { addItem } from '@/redux/slice/basketSlice';
+import { toggleWishlist } from '@/redux/slice/wishlistSlice';
+import { toggleCompare } from '@/redux/slice/compareSlice';
+import { setCompareModalOpen } from '@/redux/slice/uiSlice';
 
 export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
+    const dispatch = useDispatch();
+    const wishlistItems = useSelector(state => state.wishlist.items);
+    const compareItems = useSelector(state => state.compare.items);
+
+    const isInWishlist = wishlistItems.some(item => item._id === product._id);
+    const isInCompare = compareItems.some(item => item._id === product._id);
+
+    const handleCompare = () => {
+        dispatch(toggleCompare(product));
+        if (!isInCompare && compareItems.length === 1) {
+            dispatch(setCompareModalOpen(true));
+        }
+    };
     return (
         <div className="flex-1 space-y-7">
             {/* Title & Price */}
@@ -45,12 +64,18 @@ export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
                     </button>
                 </div>
 
-                <button className="flex-1 bg-[#e4e6eb] hover:bg-gray-300 text-gray-900 h-[50px] rounded-full font-bold uppercase text-[14px] tracking-wider cursor-pointer transition-all">
-                    Add To Cart
+                <button
+                    onClick={() => dispatch(addItem({ product, quantity }))}
+                    className="flex-1 bg-gray-900 hover:bg-[#ff0080] text-white h-[50px] rounded-full font-bold uppercase text-[14px] tracking-wider cursor-pointer transition-all"
+                >
+                    Add To Basket
                 </button>
 
-                <button className="w-[50px] h-[50px] rounded-full bg-[#f0f0f0] flex items-center justify-center text-gray-500 hover:text-[#ff0080] cursor-pointer transition-colors">
-                    <IconStar size={20} />
+                <button
+                    onClick={() => dispatch(toggleWishlist(product))}
+                    className={`w-[50px] h-[50px] rounded-full flex items-center justify-center cursor-pointer transition-colors ${isInWishlist ? 'bg-[#ff0080] text-white' : 'bg-[#f0f0f0] text-gray-500 hover:text-[#ff0080]'}`}
+                >
+                    {isInWishlist ? <IconStarFilled size={20} /> : <IconStar size={20} />}
                 </button>
             </div>
 
@@ -61,8 +86,11 @@ export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
 
             {/* Secondary Actions */}
             <div className="flex items-center justify-start gap-8 pt-2 border-b border-gray-100 pb-8">
-                <button className="flex items-center gap-2 text-[14px] font-bold text-gray-600 hover:text-gray-900 cursor-pointer transition-colors">
-                    <IconGitCompare size={18} /> Compare
+                <button
+                    onClick={handleCompare}
+                    className={`flex items-center gap-2 text-[14px] font-bold cursor-pointer transition-colors ${isInCompare ? 'text-[#ff0080]' : 'text-gray-600 hover:text-gray-900'}`}
+                >
+                    <IconGitCompare size={18} /> {isInCompare ? 'In Compare' : 'Compare'}
                 </button>
                 <button className="flex items-center gap-2 text-[14px] font-bold text-gray-600 hover:text-gray-900 cursor-pointer transition-colors">
                     <IconHelpCircle size={18} /> Ask a Question
@@ -97,9 +125,11 @@ export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
 
             {/* Metadata Section */}
             <div className="pt-8 border-t border-gray-100 space-y-3 text-[14px]">
-                <div><span className="text-gray-900 font-bold uppercase tracking-widest mr-2">SKU:</span> <span className="text-gray-500 font-medium">{product.sku}</span></div>
-                <div><span className="text-gray-900 font-bold uppercase tracking-widest mr-2">Categories:</span> <span className="text-gray-500 font-medium">{product.category}</span></div>
-                <div><span className="text-gray-900 font-bold uppercase tracking-widest mr-2">Tags:</span> <span className="text-gray-500 font-medium">{product.tags}</span></div>
+                <div><span className="text-gray-900 font-bold uppercase tracking-widest mr-2">SKU:</span> <span className="text-gray-500 font-medium">{product.sku || 'N/A'}</span></div>
+                <div><span className="text-gray-900 font-bold uppercase tracking-widest mr-2">Category:</span> <span className="text-gray-500 font-medium">{product.category?.name || 'Uncategorized'}</span></div>
+                {product.tags?.length > 0 && (
+                    <div><span className="text-gray-900 font-bold uppercase tracking-widest mr-2">Tags:</span> <span className="text-gray-500 font-medium">{product.tags.join(', ')}</span></div>
+                )}
             </div>
         </div>
     );

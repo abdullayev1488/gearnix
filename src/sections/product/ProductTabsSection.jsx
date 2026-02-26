@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ProductDescriptionTab } from '../../components/ui/tabs/ProductDescriptionTab';
-import { ProductReviewsTab } from '../../components/ui/tabs/ProductReviewsTab';
+import { ProductDescriptionTab } from '@/components/ui/tabs/ProductDescriptionTab';
+import { ProductReviewsTab } from '@/components/ui/tabs/ProductReviewsTab';
 
 export const ProductTabsSection = () => {
     const [activeTab, setActiveTab] = useState('description');

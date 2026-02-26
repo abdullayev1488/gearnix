@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from '../../components/custom/Button'
+import { Button } from '@/components/custom/Button'
 import { IconPlayerPlayFilled } from '@tabler/icons-react'
-import { FuturedModal } from '../../components/ui/modals/FuturedModal';
+import { FuturedModal } from '@/components/ui/modals/FuturedModal';
 
 export const FuturedSection = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);

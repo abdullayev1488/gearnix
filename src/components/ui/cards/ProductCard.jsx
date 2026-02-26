@@ -1,40 +1,59 @@
 import { IconStar, IconStarFilled, IconEye, IconArrowsExchange, IconShoppingCart } from '@tabler/icons-react';
 import { Link } from 'react-router';
-import { useDispatch } from 'react-redux';
-import { setBasketOpen, setQuickViewOpen, setSelectedProduct } from '../../../redux/slice/uiSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setQuickViewOpen, setSelectedProduct, setCompareModalOpen } from '@/redux/slice/uiSlice';
+import { addItem } from '@/redux/slice/basketSlice';
+import { toggleWishlist } from '@/redux/slice/wishlistSlice';
+import { toggleCompare } from '@/redux/slice/compareSlice';
 
 export const ProductCard = ({ product }) => {
     const dispatch = useDispatch();
+    const wishlistItems = useSelector(state => state.wishlist.items);
+    const compareItems = useSelector(state => state.compare.items);
+
+    const isInWishlist = wishlistItems.some(item => item._id === product._id);
+    const isInCompare = compareItems.some(item => item._id === product._id);
 
     const handleAction = (e, type) => {
         e.preventDefault();
         e.stopPropagation();
 
         if (type === 'basket') {
-            dispatch(setBasketOpen(true));
+            dispatch(addItem({ product, quantity: 1 }));
         }
         if (type === 'view') {
             dispatch(setSelectedProduct(product));
             dispatch(setQuickViewOpen(true));
         }
-        // if (type === 'wishlist') {
-        //     dispatch(setWishlistOpen(true));
-        // }
+        if (type === 'wishlist') {
+            dispatch(toggleWishlist(product));
+        }
+        if (type === 'exchange') {
+            dispatch(toggleCompare(product));
+            // If we are adding the second product, open the modal
+            if (!isInCompare && compareItems.length === 1) {
+                dispatch(setCompareModalOpen(true));
+            }
+        }
     };
 
     return (
-        <Link to="/product" className="group bg-white block rounded-2xl pb-2 cursor-pointer transition-all duration-300 hover:!shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:!-translate-y-1">
+        <Link
+            to="/product"
+            onClick={() => dispatch(setSelectedProduct(product))}
+            className="group bg-white block rounded-2xl pb-2 cursor-pointer transition-all duration-300 hover:!shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:!-translate-y-1"
+        >
             {/* Image Container */}
             <div className="relative aspect-square rounded-2xl group-hover:rounded-b-none transition-all duration-300 bg-[#F6F7F9] flex items-center justify-center p-8 overflow-hidden">
                 {/* Action Buttons Overlay */}
                 <div className="absolute top-4 right-4 flex flex-col gap-2 z-20 transition-all duration-300 translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
                     <button
                         onClick={(e) => handleAction(e, 'wishlist')}
-                        className="group/btn w-10 h-10 rounded-xl cursor-pointer bg-white flex items-center justify-center text-gray-600 hover:bg-[#ff512f] hover:text-white transition-all duration-300 shadow-sm relative"
+                        className={`group/btn w-10 h-10 rounded-xl cursor-pointer flex items-center justify-center transition-all duration-300 shadow-sm relative ${isInWishlist ? 'bg-[#ff512f] text-white' : 'bg-white text-gray-600 hover:bg-[#ff512f] hover:text-white'}`}
                     >
-                        <IconStar size={20} />
+                        {isInWishlist ? <IconStarFilled size={20} /> : <IconStar size={20} />}
                         <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-gradient-to-r from-[#ff512f] to-[#dd2476] text-white text-[11px] font-bold rounded-lg opacity-0 invisible group-hover/btn:opacity-100 group-hover/btn:visible transition-all duration-300 whitespace-nowrap shadow-md">
-                            Wishlist
+                            {isInWishlist ? 'In Wishlist' : 'Wishlist'}
                             <span className="absolute left-[100%] top-1/2 -translate-y-1/2 border-[5px] border-transparent border-l-[#dd2476]" />
                         </span>
                     </button>
@@ -50,11 +69,11 @@ export const ProductCard = ({ product }) => {
                     </button>
                     <button
                         onClick={(e) => handleAction(e, 'exchange')}
-                        className="group/btn w-10 h-10 rounded-xl cursor-pointer bg-white flex items-center justify-center text-gray-600 hover:bg-[#ff512f] hover:text-white transition-all duration-300 shadow-sm relative"
+                        className={`group/btn w-10 h-10 rounded-xl cursor-pointer flex items-center justify-center transition-all duration-300 shadow-sm relative ${isInCompare ? 'bg-[#ff512f] text-white' : 'bg-white text-gray-600 hover:bg-[#ff512f] hover:text-white'}`}
                     >
                         <IconArrowsExchange size={20} />
                         <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-gradient-to-r from-[#ff512f] to-[#dd2476] text-white text-[11px] font-bold rounded-lg opacity-0 invisible group-hover/btn:opacity-100 group-hover/btn:visible transition-all duration-300 whitespace-nowrap shadow-md">
-                            Compare
+                            {isInCompare ? 'In Compare' : 'Compare'}
                             <span className="absolute left-[100%] top-1/2 -translate-y-1/2 border-[5px] border-transparent border-l-[#dd2476]" />
                         </span>
                     </button>
@@ -77,7 +96,7 @@ export const ProductCard = ({ product }) => {
                 )}
 
                 <img
-                    src={product.image}
+                    src={product.image || product.images?.[0]}
                     alt={product.name}
                     className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
                 />

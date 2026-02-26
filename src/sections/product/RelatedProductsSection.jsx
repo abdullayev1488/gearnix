@@ -1,16 +1,35 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
-import { products } from '../../const';
-import { ProductCard } from '../../components/ui/cards/ProductCard';
+import api from '@/axios/axios';
+import { ProductCard } from '@/components/ui/cards/ProductCard';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 
 export const RelatedProductsSection = () => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const res = await api.get('/product', { params: { status: 'active', limit: 10 } });
+                setProducts(res.data.data?.products || []);
+            } catch (error) {
+                console.error('Failed to fetch related products', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProducts();
+    }, []);
+
+    if (loading) return null;
+
     // Show a selection of products as "related"
-    const relatedProducts = products.slice(0, 10);
+    const relatedProducts = products;
 
     return (
         <section className="py-20 max-w-screen-2xl mx-auto px-4 overflow-hidden relative border-t border-gray-50">
@@ -52,7 +71,7 @@ export const RelatedProductsSection = () => {
                 className="related-products-swiper !overflow-visible"
             >
                 {relatedProducts.map((product) => (
-                    <SwiperSlide key={product.id} className="pb-4">
+                    <SwiperSlide key={product._id} className="pb-4">
                         <ProductCard product={product} />
                     </SwiperSlide>
                 ))}

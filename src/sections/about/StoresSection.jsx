@@ -1,4 +1,4 @@
-import { stores } from '../../const'
+import { stores } from '@/const'
 
 export const StoresSection = () => {
 

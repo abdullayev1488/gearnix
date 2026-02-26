@@ -1,20 +1,17 @@
 import { IconShoppingBag, IconStar, IconTrash, IconX } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setWishlistOpen } from '../../../redux/slice/uiSlice';
+import { setWishlistOpen } from '@/redux/slice/uiSlice';
+import { toggleWishlist } from '@/redux/slice/wishlistSlice';
+import { addItem } from '@/redux/slice/basketSlice';
 
 export const Wishlist = () => {
     const dispatch = useDispatch();
     const isOpen = useSelector((state) => state.ui.wishlistOpen);
+    const { items: wishlistItems } = useSelector((state) => state.wishlist);
 
-    const wishlistItems = [
-        {
-            id: 1,
-            name: "AURORA GLIDE WIRELESS",
-            price: 90.00,
-            image: "/img/product/1.png",
-            inStock: true
-        }
-    ];
+    const handleAddToBasket = (item) => {
+        dispatch(addItem({ product: item, quantity: 1 }));
+    };
 
     return (
         <>
@@ -51,7 +48,7 @@ export const Wishlist = () => {
                     {wishlistItems.length > 0 ? (
                         <div className="space-y-6">
                             {wishlistItems.map((item) => (
-                                <div key={item.id} className="group relative flex gap-4 p-4 rounded-2xl border border-gray-100 bg-white hover:shadow-lg transition-all duration-300">
+                                <div key={item._id} className="group relative flex gap-4 p-4 rounded-2xl border border-gray-100 bg-white hover:shadow-lg transition-all duration-300">
                                     {/* Image */}
                                     <div className="w-24 h-24 bg-[#F6F7F9] rounded-xl flex items-center justify-center shrink-0 p-2">
                                         <img
@@ -64,11 +61,11 @@ export const Wishlist = () => {
                                     {/* Details */}
                                     <div className="flex-1 flex flex-col justify-between py-1">
                                         <div>
-                                            <h3 className="font-orbitron text-sm font-bold text-gray-900 leading-snug mb-1">
+                                            <h3 className="font-orbitron text-sm font-bold text-gray-900 leading-snug mb-1 uppercase line-clamp-1">
                                                 {item.name}
                                             </h3>
-                                            <p className="text-xs text-gray-500 font-medium">
-                                                {item.inStock ? "In Stock" : "Out of Stock"}
+                                            <p className="text-xs text-green-500 font-medium">
+                                                In Stock
                                             </p>
                                         </div>
 
@@ -77,7 +74,10 @@ export const Wishlist = () => {
                                                 ${item.price.toFixed(2)}
                                             </span>
 
-                                            <button className="flex items-center gap-2 px-3 py-2 bg-black text-white rounded-lg text-[10px] font-bold uppercase tracking-wider hover:bg-gradient-to-r from-[#ff512f] to-[#dd2476] transition-all cursor-pointer">
+                                            <button
+                                                onClick={() => handleAddToBasket(item)}
+                                                className="flex items-center gap-2 px-3 py-2 bg-black text-white rounded-lg text-[10px] font-bold uppercase tracking-wider hover:bg-gradient-to-r from-[#ff512f] to-[#dd2476] transition-all cursor-pointer"
+                                            >
                                                 <IconShoppingBag size={14} />
                                                 Add
                                             </button>
@@ -85,7 +85,10 @@ export const Wishlist = () => {
                                     </div>
 
                                     {/* Remove Button */}
-                                    <button className="absolute top-1 right-1 bg-white text-gray-400 hover:text-red-500 shadow-md p-1.5 rounded-full border border-gray-100 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer">
+                                    <button
+                                        onClick={() => dispatch(toggleWishlist(item))}
+                                        className="absolute top-1 right-1 bg-white text-gray-400 hover:text-red-500 shadow-md p-1.5 rounded-full border border-gray-100 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer"
+                                    >
                                         <IconTrash size={16} />
                                     </button>
                                 </div>
@@ -106,7 +109,7 @@ export const Wishlist = () => {
                             </div>
                             <button
                                 onClick={() => dispatch(setWishlistOpen(false))}
-                                className="mt-4 px-8 py-3 bg-black text-white rounded-full font-orbitron text-xs font-bold uppercase tracking-wider hover:bg-gradient-to-r from-[#ff512f] to-[#dd2476] transition-all"
+                                className="mt-4 px-8 py-3 bg-black text-white rounded-full font-orbitron text-xs font-bold uppercase tracking-wider hover:bg-gradient-to-r from-[#ff512f] to-[#dd2476] transition-all cursor-pointer"
                             >
                                 Start Shopping
                             </button>
@@ -114,7 +117,7 @@ export const Wishlist = () => {
                     )}
                 </div>
 
-                {/* Footer Tip (Optional) */}
+                {/* Footer Tip */}
                 {wishlistItems.length > 0 && (
                     <div className="p-4 bg-gray-50 border-t border-gray-100 text-center">
                         <p className="text-[10px] text-gray-500">

@@ -1,8 +1,8 @@
 import { IconX, IconChevronRight } from '@tabler/icons-react'
 import { NavLink } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { navLinks, socials } from '../../../const'
-import { setMobileMenuOpen } from '../../../redux/slice/uiSlice'
+import { navLinks, socials } from '@/const'
+import { setMobileMenuOpen } from '@/redux/slice/uiSlice'
 
 export const MobileMenu = () => {
     const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IconX, IconSearch, IconChevronDown } from "@tabler/icons-react";
-import { setSearchOpen } from "../../../redux/slice/uiSlice";
+import { setSearchOpen } from "@/redux/slice/uiSlice";
 
 export const SearchModal = () => {
     const dispatch = useDispatch();

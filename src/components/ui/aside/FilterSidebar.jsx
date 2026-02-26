@@ -1,7 +1,7 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { IconChevronDown, IconChevronUp, IconStarFilled, IconStar } from '@tabler/icons-react';
-import { categories, brands } from '@/const';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import api from '../../../axios/axios';
 import {
     setCategory,
     toggleBrand,
@@ -12,16 +12,34 @@ import { SliderRange } from '@/components/custom/RangeSlider';
 export const FilterSidebar = () => {
     const dispatch = useDispatch();
     const { filters } = useSelector(state => state.filter);
-    
+    const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchFilters = async () => {
+            try {
+                const [catRes, brandRes] = await Promise.all([
+                    api.get('/category', { params: { status: 'active' } }),
+                    api.get('/brand', { params: { status: 'active' } })
+                ]);
+                setCategories(catRes.data.data || []);
+                setBrands(brandRes.data.data || []);
+            } catch (error) {
+                console.error('Failed to fetch filters', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchFilters();
+    }, []);
+
     const productColors = [
         '#1a202c', '#4a5568', '#48bb78', '#4299e1', '#9f7aea', '#ed64a6', '#f56565', '#ed8936', '#cbd5e0', '#ffffff'
     ];
 
- 
-
-
     const FilterSection = ({ title, children, defaultOpen = true }) => {
-        const [isOpen, setIsOpen] = React.useState(defaultOpen);
+        const [isOpen, setIsOpen] = useState(defaultOpen);
         return (
             <div className="border-b border-gray-100 py-6 last:border-0">
                 <button
@@ -40,6 +58,8 @@ export const FilterSidebar = () => {
         );
     };
 
+    if (loading) return null;
+
     return (
         <aside className="w-full lg:w-[330px] flex-shrink-0">
             <div className="bg-white rounded-[32px] p-8 border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.03)]">
@@ -51,13 +71,13 @@ export const FilterSidebar = () => {
                 <FilterSection title="Categories">
                     <ul className="space-y-4">
                         {categories.map((cat) => (
-                            <li key={cat.name} className="flex items-center justify-between group cursor-pointer" onClick={() => dispatch(setCategory(cat.name))}>
+                            <li key={cat._id} className="flex items-center justify-between group cursor-pointer" onClick={() => dispatch(setCategory(cat.name))}>
                                 <div className="flex items-center gap-4">
                                     <div className={`w-[22px] h-[22px] rounded-md border-2 transition-all duration-200 flex items-center justify-center ${filters.category === cat.name ? 'bg-white border-gray-300' : 'border-gray-200 group-hover:border-gray-300'}`}>
                                         {filters.category === cat.name && <div className="w-[10px] h-[10px] bg-[#ff0080] rounded-sm" />}
                                     </div>
                                     <span className={`text-[15px] transition-colors ${filters.category === cat.name ? 'text-gray-900 font-medium' : 'text-gray-600 group-hover:text-gray-900'}`}>
-                                        {cat.name} <span className="text-gray-400 font-normal">({cat.count})</span>
+                                        {cat.name}
                                     </span>
                                 </div>
                             </li>
@@ -74,14 +94,13 @@ export const FilterSidebar = () => {
                                 <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">$0.00</span>
                             </div>
                             <div className="flex flex-col gap-1 items-end">
-                                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">$90.00</span>
+                                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">$1000.00</span>
                             </div>
                         </div>
                         <div className="flex flex-col gap-4 mt-8">
                             <span className="text-[14px] font-medium text-gray-900">
                                 Ranger ($): <span className="font-bold">{filters.priceRange[0]} — {filters.priceRange[1]}</span>
                             </span>
-                            <button className="w-full py-2.5 bg-[#f0f0f0] hover:bg-gray-200 text-[13px] font-bold text-gray-900 rounded-lg transition-colors uppercase tracking-widest">Filter</button>
                         </div>
                     </div>
                 </FilterSection>
@@ -89,8 +108,8 @@ export const FilterSidebar = () => {
                 {/* Brands */}
                 <FilterSection title="Brands">
                     <ul className="space-y-4">
-                        {brands.map((brand, idx) => (
-                            <li key={`${brand.name}-${idx}`} className="flex items-center justify-between group cursor-pointer" onClick={() => dispatch(toggleBrand(brand.name))}>
+                        {brands.map((brand) => (
+                            <li key={brand._id} className="flex items-center justify-between group cursor-pointer" onClick={() => dispatch(toggleBrand(brand.name))}>
                                 <div className="flex items-center gap-4">
                                     <div className={`w-[22px] h-[22px] rounded-md border-2 transition-all duration-200 flex items-center justify-center ${filters.brands.includes(brand.name) ? 'bg-white border-gray-300' : 'border-gray-200 group-hover:border-gray-300'}`}>
                                         {filters.brands.includes(brand.name) && (
@@ -101,7 +120,6 @@ export const FilterSidebar = () => {
                                         {brand.name}
                                     </span>
                                 </div>
-                                <span className="text-[14px] text-gray-400 font-medium">({brand.count})</span>
                             </li>
                         ))}
                     </ul>

@@ -8,7 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import api from '../../axios/axios';
+import api from '@/axios/axios';
 
 
 export const ShopCarouselSection = () => {

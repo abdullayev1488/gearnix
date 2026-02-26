@@ -1,4 +1,4 @@
-import { features } from '../../const'
+import { features } from '@/const'
 
 export const HowWeWorkSection = () => {
 

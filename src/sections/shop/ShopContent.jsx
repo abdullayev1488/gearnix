@@ -1,10 +1,11 @@
 import { useMemo, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { IconLayoutGrid, IconList, IconAdjustmentsHorizontal, IconStar } from '@tabler/icons-react';
-import { FilterSidebar } from '../../components/ui/aside/FilterSidebar';
-import { ProductCard } from '../../components/ui/cards/ProductCard';
-import { products, sortOptions } from '../../const';
-import { setSortBy, setViewType } from '../../redux/slice/filterSlice';
+import { FilterSidebar } from '@/components/ui/aside/FilterSidebar';
+import { ProductCard } from '@/components/ui/cards/ProductCard';
+import { sortOptions } from '@/const';
+import api from '@/axios/axios';
+import { setSortBy, setViewType } from '@/redux/slice/filterSlice';
 
 export const ShopContent = () => {
     const dispatch = useDispatch();
@@ -12,20 +13,34 @@ export const ShopContent = () => {
     const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
     const [isSortOpen, setIsSortOpen] = useState(false);
     const [visibleCount, setVisibleCount] = useState(9);
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const res = await api.get('/product', { params: { status: 'active', limit: 100 } });
+                setProducts(res.data.data?.products || []);
+            } catch (error) {
+                console.error('Failed to fetch products', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProducts();
+    }, []);
 
     // Reset visible count when filters change
     useEffect(() => {
         setVisibleCount(9);
     }, [filters, sortBy]);
 
-
-
     const filteredProducts = useMemo(() => {
         let result = [...products];
 
         // Filter by category
         if (filters.category) {
-            result = result.filter(product => product.category === filters.category);
+            result = result.filter(product => product.category?.name === filters.category);
         }
 
         // Filter by price
@@ -33,7 +48,7 @@ export const ShopContent = () => {
 
         // Filter by brands
         if (filters.brands.length > 0) {
-            result = result.filter(product => filters.brands.includes(product.brand));
+            result = result.filter(product => filters.brands.includes(product.brand?.name));
         }
 
         // Sorting
@@ -42,13 +57,13 @@ export const ShopContent = () => {
         } else if (sortBy === 'price-high') {
             result.sort((a, b) => b.price - a.price);
         } else if (sortBy === 'latest' || sortBy === 'default') {
-            result.sort((a, b) => b.id - a.id);
+            result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         } else if (sortBy === 'rating') {
             result.sort((a, b) => b.rating - a.rating);
         }
 
         return result;
-    }, [filters, sortBy]);
+    }, [products, filters, sortBy]);
 
     const displayProducts = useMemo(() => {
         return filteredProducts.slice(0, visibleCount);
@@ -158,9 +173,9 @@ export const ShopContent = () => {
                                 }`}>
                                 {displayProducts.map(product => (
                                     viewType === 'list' ? (
-                                        <ListViewCard key={product.id} product={product} />
+                                        <ListViewCard key={product._id} product={product} />
                                     ) : (
-                                        <ProductCard key={product.id} product={product} />
+                                        <ProductCard key={product._id} product={product} />
                                     )
                                 ))}
                             </div>

@@ -2,25 +2,29 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IconMenu2 } from "@tabler/icons-react";
 import { NavLink } from "react-router";
-import { navLinks, navIcons } from "../../const";
-import { Basket } from "../ui/drawer/Basket.jsx";
-import { Wishlist } from "../ui/drawer/Wishlist.jsx";
-import { MobileMenu } from "../ui/drawer/MobileMenu.jsx";
-import { AuthModal } from "../ui/modals/AuthModal";
-import { SearchModal } from "../ui/modals/SearchModal";
-import { QuickViewModal } from "../ui/modals/QuickViewModal";
+import { navLinks, navIcons } from "@/const";
+import { Basket } from "@/components/ui/drawer/Basket.jsx";
+import { Wishlist } from "@/components/ui/drawer/Wishlist.jsx";
+import { MobileMenu } from "@/components/ui/drawer/MobileMenu.jsx";
+import { AuthModal } from "@/components/ui/modals/AuthModal";
+import { SearchModal } from "@/components/ui/modals/SearchModal";
+import { QuickViewModal } from "@/components/ui/modals/QuickViewModal";
+import { CompareModal } from "@/components/ui/modals/CompareModal";
 import {
   setBasketOpen,
   setAuthOpen,
   setSearchOpen,
   setWishlistOpen,
   setMobileMenuOpen,
-  setQuickViewOpen
-} from "../../redux/slice/uiSlice";
+  setQuickViewOpen,
+  setCompareModalOpen
+} from "@/redux/slice/uiSlice";
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const { basketOpen, wishlistOpen, authOpen, searchOpen, mobileMenuOpen, quickViewOpen } = useSelector((state) => state.ui);
+  const { basketOpen, wishlistOpen, authOpen, searchOpen, mobileMenuOpen, quickViewOpen, compareModalOpen } = useSelector((state) => state.ui);
+  const basketItems = useSelector((state) => state.basket.items);
+  const wishlistItems = useSelector((state) => state.wishlist.items);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -86,7 +90,7 @@ export const Header = () => {
                 <item.Icon className="group-hover:text-black transition-colors" size={22} />
                 {(item.name === "wishlist" || item.name === "basket") && (
                   <span className="absolute -top-1 -right-1 bg-[#ff512f] text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                    {item.name === "wishlist" ? "1" : "1"}
+                    {item.name === "wishlist" ? wishlistItems.length : basketItems.length}
                   </span>
                 )}
               </div>
@@ -101,6 +105,7 @@ export const Header = () => {
       <AuthModal isOpen={authOpen} onClose={() => dispatch(setAuthOpen(false))} />
       <SearchModal isOpen={searchOpen} onClose={() => dispatch(setSearchOpen(false))} />
       <QuickViewModal isOpen={quickViewOpen} onClose={() => dispatch(setQuickViewOpen(false))} />
+      <CompareModal isOpen={compareModalOpen} onClose={() => dispatch(setCompareModalOpen(false))} />
     </>
   );
 };

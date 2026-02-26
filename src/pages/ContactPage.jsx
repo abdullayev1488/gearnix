@@ -1,6 +1,6 @@
-import { TopSection } from "../sections/TopSection"
-import { MapSection } from "../sections/contact/MapSection"
-import { ContactSection } from "../sections/contact/ContactSection"
+import { TopSection } from "@/sections/TopSection"
+import { MapSection } from "@/sections/contact/MapSection"
+import { ContactSection } from "@/sections/contact/ContactSection"
 
 export const ContactPage = () => {
     const breadcrumbs = [

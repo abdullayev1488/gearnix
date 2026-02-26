@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { contactSocials } from '../../const';
+import { contactSocials } from '@/const';
 
 export const ContactSection = () => {
     return (

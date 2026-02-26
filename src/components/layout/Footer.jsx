@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { socials, footerLinks } from "../../const";
-import { ScrolTop } from "../custom/ScrolTop";
+import { socials, footerLinks } from "@/const";
+import { ScrolTop } from "@/components/custom/ScrolTop";
 import { Link } from "react-router";
 
 export const Footer = () => {
@@ -37,7 +37,7 @@ export const Footer = () => {
               Enhance your gaming experience with precision-engineered gear that pushes the limits of performance.
             </p>
             <div className="flex flex-wrap gap-3">
-              {socials.map((social,id) => (
+              {socials.map((social, id) => (
                 <Link
                   key={id}
                   to={social.path}

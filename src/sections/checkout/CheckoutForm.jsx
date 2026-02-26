@@ -1,5 +1,5 @@
 import React from 'react'
-import { countries } from '../../const/countries'
+import { countries } from '@/const/countries'
 
 export const CheckoutForm = () => {
     return (

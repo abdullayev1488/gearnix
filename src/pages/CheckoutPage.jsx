@@ -1,6 +1,6 @@
 import React from 'react'
-import { CheckoutForm } from '../sections/checkout/CheckoutForm'
-import { OrderSummary } from '../sections/checkout/OrderSummary'
+import { CheckoutForm } from '@/sections/checkout/CheckoutForm'
+import { OrderSummary } from '@/sections/checkout/OrderSummary'
 import { Link } from 'react-router'
 
 export const CheckoutPage = () => {
