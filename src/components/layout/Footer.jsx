@@ -91,7 +91,7 @@ export const Footer = () => {
                   Payments
                 </h4>
                 <div className="flex flex-wrap items-center gap-4">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa" className="h-5 w-auto object-contain opacity-70 hover:opacity-100 transition-all cursor-pointer" />
+                  <img src="https://cdn.freebiesupply.com/logos/large/2x/visa-logo-png-transparent.png" alt="Visa" className="h-11 w-auto object-contain opacity-70 hover:opacity-100 transition-all cursor-pointer" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-4 w-auto object-contain opacity-70 hover:opacity-100 transition-all cursor-pointer" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-5 w-auto object-contain opacity-70 hover:opacity-100 transition-all cursor-pointer" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex" className="h-5 w-auto object-contain opacity-70 hover:opacity-100 transition-all cursor-pointer" />

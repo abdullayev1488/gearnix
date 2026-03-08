@@ -42,7 +42,7 @@ export const ShopCarouselSection = () => {
                         delay: 3000,
                         disableOnInteraction: false,
                     }}
-                    loop={true}
+                    loop={categories.length > 4}
                     spaceBetween={20}
                     slidesPerView={1}
                     breakpoints={{
@@ -59,12 +59,12 @@ export const ShopCarouselSection = () => {
                     className="category-swiper"
                 >
                     {categories.map(category => (
-                        <SwiperSlide key={category.id}>
+                        <SwiperSlide key={category._id || category.id}>
                             <div className="flex flex-col items-center group cursor-pointer">
                                 {/* Circular Image Container */}
                                 <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden bg-gray-50 mb-6 border-4 border-transparent group-hover:border-[#ff512f]/10 transition-all duration-300 shadow-md">
                                     <img
-                                        src={category.images.shop}
+                                        src={category.images?.shop || category.images?.home}
                                         alt={category.name}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
@@ -74,7 +74,7 @@ export const ShopCarouselSection = () => {
                                     {category.name}
                                 </h3>
                                 <p className="text-[12px] text-[#888] font-medium uppercase tracking-wider">
-                                    Product (20)
+                                    Product ({category.products?.length || 0})
                                 </p>
                             </div>
                         </SwiperSlide>

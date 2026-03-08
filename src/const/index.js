@@ -46,6 +46,25 @@ export const navLinks = [
   { title: "Contact", path: "/contact" }
 ]
 
+export const staticCategories = [
+  {
+    name: "Keyboards Gaming",
+    img: "/img/img-2-1.png"
+  },
+  {
+    name: "Gaming Mouse",
+    img: "/img/img-2-2.png"
+  },
+  {
+    name: "Headset Gaming",
+    img: "/img/img-2-3.png"
+  },
+  {
+    name: "Gaming Controllers",
+    img: "/img/img-2-4.png"
+  }
+];
+
 export const navIcons = [
   { Icon: IconSearch, name: "search" },
   { Icon: IconUser, name: "user" },
@@ -262,9 +281,8 @@ export const contactSocials = [
 
 export const sortOptions = [
   { label: 'Default sorting', value: 'default' },
-  { label: 'Sort by popularity', value: 'popularity' },
-  { label: 'Sort by average rating', value: 'rating' },
-  { label: 'Sort by latest', value: 'latest' },
+  { label: 'Sort by high rating', value: 'rating' },
+  { label: 'Sort by low rating', value: 'latest' },
   { label: 'Sort by price: low to high', value: 'price-low' },
   { label: 'Sort by price: high to low', value: 'price-high' },
 ];

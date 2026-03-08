@@ -5,7 +5,7 @@ import { FilterSidebar } from '@/components/ui/aside/FilterSidebar';
 import { ProductCard } from '@/components/ui/cards/ProductCard';
 import { sortOptions } from '@/const';
 import api from '@/axios/axios';
-import { setSortBy, setViewType } from '@/redux/slice/filterSlice';
+import { setSortBy, setViewType, setMaxRange } from '@/redux/slice/filterSlice';
 
 export const ShopContent = () => {
     const dispatch = useDispatch();
@@ -18,9 +18,24 @@ export const ShopContent = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true);
             try {
-                const res = await api.get('/product', { params: { status: 'active', limit: 100 } });
+                const params = {
+                    status: 'active',
+                    limit: 100,
+                    category: filters.category,
+                    minPrice: filters.priceRange[0],
+                    maxPrice: filters.priceRange[1],
+                    brands: filters.brands.join(','),
+                    sortBy: sortBy
+                };
+                const res = await api.get('/product', { params });
                 setProducts(res.data.data?.products || []);
+
+                // Sync max range from backend
+                if (res.data.data?.pagination?.maxPrice) {
+                    dispatch(setMaxRange(res.data.data.pagination.maxPrice));
+                }
             } catch (error) {
                 console.error('Failed to fetch products', error);
             } finally {
@@ -28,52 +43,22 @@ export const ShopContent = () => {
             }
         };
         fetchProducts();
-    }, []);
+    }, [filters, sortBy]);
 
     // Reset visible count when filters change
     useEffect(() => {
         setVisibleCount(9);
     }, [filters, sortBy]);
 
-    const filteredProducts = useMemo(() => {
-        let result = [...products];
-
-        // Filter by category
-        if (filters.category) {
-            result = result.filter(product => product.category?.name === filters.category);
-        }
-
-        // Filter by price
-        result = result.filter(product => product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]);
-
-        // Filter by brands
-        if (filters.brands.length > 0) {
-            result = result.filter(product => filters.brands.includes(product.brand?.name));
-        }
-
-        // Sorting
-        if (sortBy === 'price-low') {
-            result.sort((a, b) => a.price - b.price);
-        } else if (sortBy === 'price-high') {
-            result.sort((a, b) => b.price - a.price);
-        } else if (sortBy === 'latest' || sortBy === 'default') {
-            result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        } else if (sortBy === 'rating') {
-            result.sort((a, b) => b.rating - a.rating);
-        }
-
-        return result;
-    }, [products, filters, sortBy]);
-
     const displayProducts = useMemo(() => {
-        return filteredProducts.slice(0, visibleCount);
-    }, [filteredProducts, visibleCount]);
+        return products.slice(0, visibleCount);
+    }, [products, visibleCount]);
 
     const handleLoadMore = () => {
         setVisibleCount(prev => prev + 9);
     };
 
-    const progressPercentage = filteredProducts.length > 0 ? (displayProducts.length / filteredProducts.length) * 100 : 0;
+    const progressPercentage = products.length > 0 ? (displayProducts.length / products.length) * 100 : 0;
 
     return (
         <section className="bg-[#fcfdff] py-20 px-4 sm:px-6 lg:px-8">
@@ -100,7 +85,7 @@ export const ShopContent = () => {
                         {/* Top Controls */}
                         <div className="bg-[#f0f0f0]/50 rounded-[20px] p-1.5 mb-12 flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div className="px-6 text-[15px] text-gray-400 font-medium">
-                                Showing <span className="text-gray-900 font-bold">{displayProducts.length}</span> of <span className="text-gray-900 font-bold">{filteredProducts.length}</span> results
+                                Showing <span className="text-gray-900 font-bold">{displayProducts.length}</span> of <span className="text-gray-900 font-bold">{products.length}</span> results
                             </div>
 
                             <div className="flex items-center gap-6 w-full sm:w-auto">
@@ -166,44 +151,59 @@ export const ShopContent = () => {
                             </div>
                         </div>
 
-                        {/* Product Grid */}
-                        {displayProducts.length > 0 ? (
-                            <div className={`grid gap-x-8 gap-y-12 transition-all duration-500 ${viewType === 'grid-3' ? 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3' :
-                                viewType === 'grid-2' ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'
-                                }`}>
-                                {displayProducts.map(product => (
-                                    viewType === 'list' ? (
-                                        <ListViewCard key={product._id} product={product} />
-                                    ) : (
-                                        <ProductCard key={product._id} product={product} />
-                                    )
-                                ))}
+                        {/* Loading State */}
+                        {loading ? (
+                            <div className="flex flex-col items-center justify-center py-40 bg-white rounded-[32px] border border-gray-100 shadow-sm">
+                                <div className="relative">
+                                    <div className="w-16 h-16 border-4 border-gray-100 border-t-[#ff0080] rounded-full animate-spin"></div>
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-8 h-8 bg-[#ff0080]/10 rounded-full animate-pulse"></div>
+                                    </div>
+                                </div>
+                                <p className="mt-8 font-orbitron font-bold text-[14px] text-gray-900 uppercase tracking-[0.2em] animate-pulse">Loading Gear...</p>
                             </div>
                         ) : (
-                            <div className="bg-white rounded-[32px] p-20 text-center border border-dashed border-gray-200">
-                                <p className="text-gray-400 font-medium text-[16px]">No products found matching your filters.</p>
-                                <button className="mt-6 text-[#ff0080] font-bold uppercase text-[13px] tracking-[0.1em] hover:underline transition-all">Clear all filters</button>
-                            </div>
-                        )}
-
-                        {/* Pagination / Load More */}
-                        {filteredProducts.length > 0 && (
-                            <div className="mt-24 flex flex-col items-center">
-                                <div className="w-full max-w-[440px]">
-                                    <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden mb-6">
-                                        <div className="h-full bg-[#ff0080] rounded-full transition-all duration-1000" style={{ width: `${progressPercentage}%` }} />
+                            <>
+                                {/* Product Grid */}
+                                {displayProducts.length > 0 ? (
+                                    <div className={`grid gap-x-8 gap-y-12 transition-all duration-500 ${viewType === 'grid-3' ? 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3' :
+                                        viewType === 'grid-2' ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'
+                                        }`}>
+                                        {displayProducts.map(product => (
+                                            viewType === 'list' ? (
+                                                <ListViewCard key={product._id} product={product} />
+                                            ) : (
+                                                <ProductCard key={product._id} product={product} />
+                                            )
+                                        ))}
                                     </div>
-                                    <p className="text-center text-[14px] text-gray-400 font-medium mb-10">Showing {displayProducts.length} of {filteredProducts.length} items</p>
-                                </div>
-                                {displayProducts.length < filteredProducts.length && (
-                                    <button
-                                        onClick={handleLoadMore}
-                                        className="px-12 py-5 bg-[#f0f0f0] cursor-pointer hover:bg-gray-200 text-gray-900 rounded-2xl font-orbitron font-bold text-[14px] uppercase tracking-[0.2em] transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
-                                    >
-                                        Load More Products
-                                    </button>
+                                ) : (
+                                    <div className="bg-white rounded-[32px] p-20 text-center border border-dashed border-gray-200">
+                                        <p className="text-gray-400 font-medium text-[16px]">No products found matching your filters.</p>
+                                        <button className="mt-6 text-[#ff0080] font-bold uppercase text-[13px] tracking-[0.1em] hover:underline transition-all">Clear all filters</button>
+                                    </div>
                                 )}
-                            </div>
+
+                                {/* Pagination / Load More */}
+                                {products.length > 0 && (
+                                    <div className="mt-24 flex flex-col items-center">
+                                        <div className="w-full max-w-[440px]">
+                                            <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden mb-6">
+                                                <div className="h-full bg-[#ff0080] rounded-full transition-all duration-1000" style={{ width: `${progressPercentage}%` }} />
+                                            </div>
+                                            <p className="text-center text-[14px] text-gray-400 font-medium mb-10">Showing {displayProducts.length} of {products.length} items</p>
+                                        </div>
+                                        {displayProducts.length < products.length && (
+                                            <button
+                                                onClick={handleLoadMore}
+                                                className="px-12 py-5 bg-[#f0f0f0] cursor-pointer hover:bg-gray-200 text-gray-900 rounded-2xl font-orbitron font-bold text-[14px] uppercase tracking-[0.2em] transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                                            >
+                                                Load More Products
+                                            </button>
+                                        )}
+                                    </div>
+                                )}
+                            </>
                         )}
                     </div>
                 </div>

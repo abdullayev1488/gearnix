@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
-import api from '../../../axios/axios';
+import RangeSlider from '@/components/custom/RangeSlider';
+import api from '@/axios/axios';
 import {
     setCategory,
     toggleBrand,
     toggleColor
-} from '../../../redux/slice/filterSlice';
-import { SliderRange } from '@/components/custom/RangeSlider';
+} from '@/redux/slice/filterSlice';
 
 export const FilterSidebar = () => {
     const dispatch = useDispatch();
-    const { filters } = useSelector(state => state.filter);
+    const { filters, maxRange } = useSelector(state => state.filter);
     const [categories, setCategories] = useState([]);
     const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -87,22 +87,7 @@ export const FilterSidebar = () => {
 
                 {/* Price */}
                 <FilterSection title="Price">
-                    <div className="px-1 mt-6">
-                        <SliderRange />
-                        <div className="flex items-center justify-between mt-6">
-                            <div className="flex flex-col gap-1">
-                                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">$0.00</span>
-                            </div>
-                            <div className="flex flex-col gap-1 items-end">
-                                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">$1000.00</span>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-4 mt-8">
-                            <span className="text-[14px] font-medium text-gray-900">
-                                Ranger ($): <span className="font-bold">{filters.priceRange[0]} — {filters.priceRange[1]}</span>
-                            </span>
-                        </div>
-                    </div>
+                    <RangeSlider />
                 </FilterSection>
 
                 {/* Brands */}

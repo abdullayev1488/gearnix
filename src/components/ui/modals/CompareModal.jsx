@@ -62,13 +62,7 @@ export const CompareModal = ({ isOpen, onClose }) => {
                             {compareItems.slice(0, 2).map((item) => (
                                 <div key={item._id} className="p-6 border-b border-l border-gray-100 text-center group">
                                     <div className="relative inline-block mb-4">
-                                        <button
-                                            onClick={() => dispatch(toggleCompare(item))}
-                                            className="absolute -top-2 -right-2 p-1.5 bg-white text-gray-400 hover:text-red-500 rounded-full shadow-md border border-gray-100 opacity-0 group-hover:opacity-100 transition-all cursor-pointer z-10"
-                                        >
-                                            <IconX size={14} />
-                                        </button>
-                                        <div className="w-32 h-32 bg-[#F6F7F9] rounded-xl flex items-center justify-center p-4 transition-transform group-hover:scale-105">
+                                        <div className="w-32 h-32 bg-[#F6F7F9] rounded-xl flex items-center justify-center p-4 transition-transform">
                                             <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                                         </div>
                                     </div>

@@ -10,6 +10,7 @@ const initialState = {
     },
     sortBy: 'default',
     viewType: 'grid-3',
+    maxRange: 1000,
 };
 
 const filterSlice = createSlice({
@@ -17,10 +18,21 @@ const filterSlice = createSlice({
     initialState,
     reducers: {
         setCategory: (state, action) => {
-            state.filters.category = action.payload;
+            if (state.filters.category === action.payload) {
+                state.filters.category = null;
+            } else {
+                state.filters.category = action.payload;
+            }
         },
         setPriceRange: (state, action) => {
             state.filters.priceRange = action.payload;
+        },
+        setMaxRange: (state, action) => {
+            state.maxRange = action.payload;
+            // Also update priceRange if current max is higher than new maxRange
+            if (state.filters.priceRange[1] > action.payload) {
+                state.filters.priceRange[1] = action.payload;
+            }
         },
         toggleBrand: (state, action) => {
             const brand = action.payload;
@@ -56,6 +68,7 @@ const filterSlice = createSlice({
 export const {
     setCategory,
     setPriceRange,
+    setMaxRange,
     toggleBrand,
     setRating,
     toggleColor,
