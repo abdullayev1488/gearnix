@@ -85,6 +85,8 @@ export const ContactSection = () => {
                                 <Link
                                     key={id}
                                     to={social.path}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className={`w-10 h-10 rounded-md flex items-center justify-center text-white ${social.color} hover:scale-110 transition-transform shadow-sm`}
                                 >
                                     <social.Icon size={18} />

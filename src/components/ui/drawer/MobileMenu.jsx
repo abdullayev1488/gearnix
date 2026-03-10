@@ -81,6 +81,8 @@ export const MobileMenu = () => {
                                 <NavLink
                                     key={id}
                                     to={social.path}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="w-7 h-7 rounded-full flex items-center justify-center text-white cursor-pointer transition-all duration-500 hover:rotate-[360deg] shadow-sm"
                                     style={{
                                         background: "linear-gradient(90deg, #ff512f, #dd2476)",

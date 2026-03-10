@@ -29,7 +29,7 @@ export const CollectionsSection = () => {
                                         {collection.description}
                                     </h3>
                                 </div>
-                                <Button className="w-fit" text="Shop Now" />
+                                <Button className="w-fit" text="Shop Now"  />
                             </div>
                         </div>
                     ))}

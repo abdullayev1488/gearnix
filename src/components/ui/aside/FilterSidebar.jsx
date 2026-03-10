@@ -34,11 +34,8 @@ export const FilterSidebar = () => {
         fetchFilters();
     }, []);
 
-    const productColors = [
-        '#1a202c', '#4a5568', '#48bb78', '#4299e1', '#9f7aea', '#ed64a6', '#f56565', '#ed8936', '#cbd5e0', '#ffffff'
-    ];
 
-    const FilterSection = ({ title, children, defaultOpen = true }) => {
+    const FilterSection = ({ title, children, defaultOpen = false }) => {
         const [isOpen, setIsOpen] = useState(defaultOpen);
         return (
             <div className="border-b border-gray-100 py-6 last:border-0">
@@ -108,21 +105,6 @@ export const FilterSidebar = () => {
                             </li>
                         ))}
                     </ul>
-                </FilterSection>
-
-                {/* Colors */}
-                <FilterSection title="Colors">
-                    <div className="flex flex-wrap gap-4 p-2 mt-2">
-                        {productColors.map((color) => (
-                            <button
-                                key={color}
-                                onClick={() => dispatch(toggleColor(color))}
-                                className={`w-8 h-8 rounded-full border-2 transition-all duration-300 relative flex items-center justify-center ${filters.colors.includes(color) ? 'border-[#ff0080] ring-4 ring-[#ff0080]/10 scale-110' : 'border-transparent hover:scale-110'}`}
-                            >
-                                <div className={`w-6 h-6 rounded-full ${color === '#ffffff' ? 'border border-gray-100' : ''}`} style={{ backgroundColor: color }} />
-                            </button>
-                        ))}
-                    </div>
                 </FilterSection>
             </div>
         </aside>

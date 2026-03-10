@@ -41,6 +41,8 @@ export const Footer = () => {
                 <Link
                   key={id}
                   to={social.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
                   style={{ background: "linear-gradient(135deg, #ff416c, #ff4b2b)" }}
                 >

@@ -6,9 +6,6 @@ import {
     IconMinus,
     IconPlus,
     IconCheck,
-    IconGitCompare,
-    IconHelpCircle,
-    IconShare,
     IconTruck,
     IconClock
 } from '@tabler/icons-react';
@@ -16,9 +13,11 @@ import { addItem } from '@/redux/slice/basketSlice';
 import { toggleWishlist } from '@/redux/slice/wishlistSlice';
 import { toggleCompare } from '@/redux/slice/compareSlice';
 import { setCompareModalOpen } from '@/redux/slice/uiSlice';
+import { useNavigate } from 'react-router';
 
 export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const wishlistItems = useSelector(state => state.wishlist.items);
     const compareItems = useSelector(state => state.compare.items);
 
@@ -80,25 +79,11 @@ export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
             </div>
 
             {/* Buy It Now Button */}
-            <button className="w-full h-[54px] rounded-full bg-gradient-to-r from-[#b851f5] to-[#f551b8] text-white font-bold text-[15px] tracking-[0.1em] shadow-lg shadow-pink-200 hover:brightness-105 cursor-pointer transition-all">
+            <button
+                onClick={() => navigate('/checkout')}
+                className="w-full h-[54px] rounded-full bg-gradient-to-r from-[#b851f5] to-[#f551b8] text-white font-bold text-[15px] tracking-[0.1em] shadow-lg shadow-pink-200 hover:brightness-105 cursor-pointer transition-all">
                 Buy It Now
             </button>
-
-            {/* Secondary Actions */}
-            <div className="flex items-center justify-start gap-8 pt-2 border-b border-gray-100 pb-8">
-                <button
-                    onClick={handleCompare}
-                    className={`flex items-center gap-2 text-[14px] font-bold cursor-pointer transition-colors ${isInCompare ? 'text-[#ff0080]' : 'text-gray-600 hover:text-gray-900'}`}
-                >
-                    <IconGitCompare size={18} /> {isInCompare ? 'In Compare' : 'Compare'}
-                </button>
-                <button className="flex items-center gap-2 text-[14px] font-bold text-gray-600 hover:text-gray-900 cursor-pointer transition-colors">
-                    <IconHelpCircle size={18} /> Ask a Question
-                </button>
-                <button className="flex items-center gap-2 text-[14px] font-bold text-gray-600 hover:text-gray-900 cursor-pointer transition-colors">
-                    <IconShare size={18} /> Social Share
-                </button>
-            </div>
 
             {/* Guarantee Section */}
             <div className="bg-[#f8f9fb] p-8 rounded-[12px] text-center border border-gray-50 mt-4">
