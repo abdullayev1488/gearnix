@@ -1,5 +1,5 @@
 import { IconArrowRight } from '@tabler/icons-react'
-import { newsData } from '../../../const'
+import { newsData } from '@/const'
 
 export const NewsCard = () => {
     return (

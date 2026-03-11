@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthOpen } from "@/redux/slice/uiSlice";
+import { setUser } from "@/redux/slice/authSlice";
 import { useFormik } from "formik";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
@@ -72,6 +73,7 @@ export const AuthModal = () => {
             try {
                 const { data } = await api.post("/auth/login", values);
                 if (data.success) {
+                    dispatch(setUser(data.data));
                     resetForm();
                     closeModal();
                     toast.success("You have successfully logged in ✅", {

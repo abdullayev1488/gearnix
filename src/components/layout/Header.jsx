@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IconMenu2 } from "@tabler/icons-react";
 import { NavLink } from "react-router";
@@ -19,13 +19,18 @@ import {
   setQuickViewOpen,
   setCompareModalOpen
 } from "@/redux/slice/uiSlice";
+import { logout } from "@/redux/slice/authSlice";
+import { LogOut} from "lucide-react";
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const { basketOpen, wishlistOpen, authOpen, searchOpen, mobileMenuOpen, quickViewOpen, compareModalOpen } = useSelector((state) => state.ui);
+  const {authOpen, searchOpen, quickViewOpen, compareModalOpen } = useSelector((state) => state.ui);
   const basketItems = useSelector((state) => state.basket.items);
   const wishlistItems = useSelector((state) => state.wishlist.items);
+  const user = useSelector((state) => state.auth.user);
   const [scrolled, setScrolled] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,12 +40,34 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setUserDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   // Handle icon click
   const handleIconClick = (name) => {
     if (name === "basket") dispatch(setBasketOpen(true));
-    if (name === "user") dispatch(setAuthOpen(true));
+    if (name === "user") {
+      if (user) {
+        setUserDropdownOpen((prev) => !prev);
+      } else {
+        dispatch(setAuthOpen(true));
+      }
+    }
     if (name === "search") dispatch(setSearchOpen(true));
     if (name === "wishlist") dispatch(setWishlistOpen(true));
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setUserDropdownOpen(false);
   };
 
   return (
@@ -84,14 +111,36 @@ export const Header = () => {
             {navIcons.map((item) => (
               <div
                 key={item.name}
-                className="relative cursor-pointer group flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 transition-all"
-                onClick={() => handleIconClick(item.name)}
+                className="relative"
+                ref={item.name === "user" ? dropdownRef : null}
               >
-                <item.Icon className="group-hover:text-black transition-colors" size={22} />
-                {(item.name === "wishlist" || item.name === "basket") && (
-                  <span className="absolute -top-1 -right-1 bg-[#ff512f] text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                    {item.name === "wishlist" ? wishlistItems.length : basketItems.length}
-                  </span>
+                <div
+                  className={`relative cursor-pointer group flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 transition-all ${item.name === "user" && user ? "bg-[#ff512f]/10 text-[#ff512f]" : ""}`}
+                  onClick={() => handleIconClick(item.name)}
+                >
+                  <item.Icon className="group-hover:text-black transition-colors" size={22} />
+                  {(item.name === "wishlist" || item.name === "basket") && (
+                    <span className="absolute -top-1 -right-1 bg-[#ff512f] text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+                      {item.name === "wishlist" ? wishlistItems.length : basketItems.length}
+                    </span>
+                  )}
+                </div>
+
+                {/* User Dropdown */}
+                {item.name === "user" && user && userDropdownOpen && (
+                  <div className="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 py-3 z-[999] animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="px-4 py-3 border-b border-gray-100">
+                      <p className="text-sm font-semibold text-gray-900 font-poppins truncate">{user.username}</p>
+                      <p className="text-xs text-gray-400 font-poppins truncate">{user.email}</p>
+                    </div>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-500 hover:bg-red-50 transition-colors cursor-pointer font-poppins"
+                    >
+                      <LogOut size={16} />
+                      Logout
+                    </button>
+                  </div>
                 )}
               </div>
             ))}
@@ -109,4 +158,3 @@ export const Header = () => {
     </>
   );
 };
-

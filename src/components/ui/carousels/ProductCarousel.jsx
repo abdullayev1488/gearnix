@@ -2,9 +2,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { useRef, useState, useEffect } from 'react';
-import api from '../../../axios/axios';
+import api from '@/axios/axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ProductCard } from '../cards/ProductCard';
+import { ProductCard } from '@/components/ui/cards/ProductCard';
 import { Navigation, Pagination } from 'swiper/modules';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 

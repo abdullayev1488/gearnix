@@ -4,8 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 import { IconPlayerPlayFilled, IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { FuturedModal } from '../modals/FuturedModal';
-import { videos } from '../../../const';
+import { FuturedModal } from '@/components/ui/modals/FuturedModal';
+import { videos } from '@/const';
 
 export const ClientsCarousel = () => {
     const prevRef = useRef(null);

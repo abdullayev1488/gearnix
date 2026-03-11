@@ -1,6 +1,6 @@
 import { RouterProvider } from 'react-router'
 import { Toaster } from 'react-hot-toast'
-import { router } from './router/AppRouter'
+import { router } from '@/router/AppRouter'
 import './App.css'
 
 export const App = () => {

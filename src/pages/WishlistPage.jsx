@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router';
-import { ProductCard } from '../components/ui/cards/ProductCard';
+import { ProductCard } from '@/components/ui/cards/ProductCard';
 import { IconStar } from '@tabler/icons-react';
 
 export const WishlistPage = () => {

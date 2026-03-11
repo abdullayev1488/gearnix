@@ -35,7 +35,7 @@ export const FilterSidebar = () => {
     }, []);
 
 
-    const FilterSection = ({ title, children, defaultOpen = false }) => {
+    const FilterSection = ({ title, children, defaultOpen = true }) => {
         const [isOpen, setIsOpen] = useState(defaultOpen);
         return (
             <div className="border-b border-gray-100 py-6 last:border-0">
