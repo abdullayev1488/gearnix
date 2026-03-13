@@ -23,7 +23,7 @@ export const CategoriesSection = () => {
     if (loading) return null;
 
     return (
-        <section className='pt-24 pb-12 max-w-screen-2xl mx-auto px-4 '>
+        <section data-aos="fade-up" className='pt-24 pb-12 max-w-screen-2xl mx-auto px-4 '>
             <h2 className='text-[1.7rem] uppercase md:text-[2rem] font-orbitron font-bold mb-16 text-center md:text-left'>
                 Shop by Category
             </h2>

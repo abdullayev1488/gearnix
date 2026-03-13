@@ -10,7 +10,7 @@ export const HeroSection = () => {
             {/* White overlay to make the background "lighter" */}
             <div className="absolute inset-0" />
 
-            <div className="max-w-screen-2xl mx-auto px-4 w-full relative z-10">
+            <div data-aos="fade-right" className="max-w-screen-2xl mx-auto px-4 w-full relative z-10">
                 <article className="max-w-xl text-[#333]">
                     <h1 className="text-3xl sm:text-4xl md:text-[44px] font-bold font-orbitron leading-[1.2]">
                         The Rise of Specialized <br className="hidden sm:block" />

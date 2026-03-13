@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setWishlistOpen } from '@/redux/slice/uiSlice';
 import { toggleWishlist } from '@/redux/slice/wishlistSlice';
 import { addItem } from '@/redux/slice/basketSlice';
+import { useNavigate } from 'react-router';
 
 export const Wishlist = () => {
     const dispatch = useDispatch();
     const isOpen = useSelector((state) => state.ui.wishlistOpen);
     const { items: wishlistItems } = useSelector((state) => state.wishlist);
+    const navigate = useNavigate();
 
     const handleAddToBasket = (item) => {
         dispatch(addItem({ product: item, quantity: 1 }));
@@ -108,7 +110,10 @@ export const Wishlist = () => {
                                 </p>
                             </div>
                             <button
-                                onClick={() => dispatch(setWishlistOpen(false))}
+                                onClick={() => {
+                                    dispatch(setWishlistOpen(false))
+                                    navigate("/shop")
+                                }}
                                 className="mt-4 px-8 py-3 bg-black text-white rounded-full font-orbitron text-xs font-bold uppercase tracking-wider hover:bg-gradient-to-r from-[#ff512f] to-[#dd2476] transition-all cursor-pointer"
                             >
                                 Start Shopping

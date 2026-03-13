@@ -10,6 +10,7 @@ import { CheckoutPage } from "@/pages/CheckoutPage";
 import { WishlistPage } from "@/pages/WishlistPage";
 import { ComparePage } from "@/pages/ComparePage";
 import { ErrorPage } from "@/pages/ErrorPage";
+import { ProtectedRoute } from "@/components/custom/ProtectedRoute";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -20,7 +21,7 @@ export const router = createBrowserRouter(
             <Route path="/product" element={<ProductPage />} /> {/* /product/:path */}
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/basket" element={<BasketPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/compare" element={<ComparePage />} />
             <Route path="*" element={<ErrorPage />} />

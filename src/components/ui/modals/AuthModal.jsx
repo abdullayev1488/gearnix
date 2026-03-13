@@ -46,6 +46,7 @@ export const AuthModal = () => {
             try {
                 const { data } = await api.post("/auth/register", values);
                 if (data.success) {
+                    dispatch(setUser({ user: data.data.user, token: data.data.token }));
                     resetForm();
                     closeModal();
                     toast.success("Registration successful! Welcome aboard 🎉", {
@@ -73,7 +74,7 @@ export const AuthModal = () => {
             try {
                 const { data } = await api.post("/auth/login", values);
                 if (data.success) {
-                    dispatch(setUser(data.data));
+                    dispatch(setUser({ user: data.data.user, token: data.data.token }));
                     resetForm();
                     closeModal();
                     toast.success("You have successfully logged in ✅", {

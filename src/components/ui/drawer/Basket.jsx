@@ -125,7 +125,10 @@ export const Basket = () => {
                             </div>
                             <h3 className="font-orbitron text-[13px] font-bold text-gray-900 uppercase">Your basket is empty</h3>
                             <button
-                                onClick={() => dispatch(setBasketOpen(false))}
+                                onClick={() => {
+                                    dispatch(setBasketOpen(false));
+                                    navigate('/shop');
+                                }}
                                 className="px-6 py-2 bg-black text-white rounded-full font-orbitron text-[10px] font-bold uppercase tracking-widest hover:bg-[#ff512f] transition-all cursor-pointer"
                             >
                                 Shop Now
