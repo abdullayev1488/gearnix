@@ -29,7 +29,6 @@ const filterSlice = createSlice({
         },
         setMaxRange: (state, action) => {
             state.maxRange = action.payload;
-            // Also update priceRange if current max is higher than new maxRange
             if (state.filters.priceRange[1] > action.payload) {
                 state.filters.priceRange[1] = action.payload;
             }

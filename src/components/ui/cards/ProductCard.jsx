@@ -39,8 +39,7 @@ export const ProductCard = ({ product }) => {
 
     return (
         <Link
-            to="/product"
-            onClick={() => dispatch(setSelectedProduct(product))}
+            to={`/product/${product._id}`}
             className="group bg-white block rounded-2xl pb-2 cursor-pointer transition-all duration-300 hover:!shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:!-translate-y-1"
         >
             {/* Image Container */}

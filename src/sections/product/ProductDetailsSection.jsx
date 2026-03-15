@@ -1,21 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { Link } from 'react-router';
 import { ProductInfo } from '@/components/custom/ProductInfo';
 import { ProductImgCarousel } from '@/components/ui/carousels/ProductImgCarousel';
 
-export const ProductDetailsSection = () => {
-    const navigate = useNavigate();
-    const product = useSelector(state => state.ui.selectedProduct);
+export const ProductDetailsSection = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(0);
     const [swiper, setSwiper] = useState(null);
-
-    useEffect(() => {
-        if (!product) {
-            navigate('/shop');
-        }
-    }, [product, navigate]);
 
     if (!product) return null;
 

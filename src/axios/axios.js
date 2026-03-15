@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:7000/api',
-    // baseURL: 'https://admin.elcanali.site/api',
+    // baseURL: 'http://localhost:7000/api',
+    baseURL: 'https://admin.elcanali.site/api',
     headers: {
         'Content-Type': 'application/json'
     },
     timeout: 10000,
 });
 
-// Request interceptor - attach JWT token to every request
+// Request
 api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
@@ -23,7 +23,7 @@ api.interceptors.request.use(
     }
 );
 
-// Response interceptor - handle 401 errors (expired/invalid token)
+// Response
 api.interceptors.response.use(
     (response) => response,
     (error) => {

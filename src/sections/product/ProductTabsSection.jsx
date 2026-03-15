@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { ProductDescriptionTab } from '@/components/ui/tabs/ProductDescriptionTab';
 import { ProductReviewsTab } from '@/components/ui/tabs/ProductReviewsTab';
 
-export const ProductTabsSection = () => {
+export const ProductTabsSection = ({ product }) => {
     const [activeTab, setActiveTab] = useState('description');
 
-    const product = {
-        name: "IMMERSION XTREME PRO"
-    };
+    if (!product) return null;
 
     return (
         <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 font-inter border-t border-gray-50">

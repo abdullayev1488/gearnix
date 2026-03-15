@@ -35,7 +35,7 @@ export const BasketPage = () => {
                             {/* Basket Left */}
                             <div className="flex-[2] w-full">
 
-                                {/* Free Shipping Progress Bar */}
+                                {/* Free Shipping Bar */}
                                 <div className="mb-10 md:mb-16 max-w-3xl mx-auto lg:mx-0">
                                     <div className="flex items-center justify-between mb-4">
                                         <p className="text-xs md:text-sm text-gray-700">
@@ -57,7 +57,7 @@ export const BasketPage = () => {
                                     </div>
                                 </div>
 
-                                {/* Desktop Table - Hidden on Mobile */}
+                                {/* Desktop Table */}
                                 <div className="hidden md:block overflow-hidden">
                                     <table className="w-full border-separate border-spacing-0 bg-[#f2f2f2] !p-[2px] overflow-hidden rounded-[10px]">
                                         <thead>
@@ -157,7 +157,7 @@ export const BasketPage = () => {
                                     ))}
                                 </div>
 
-                                {/* Bottom Bar: Coupon & Update */}
+                                {/* Bottom Bar */}
                                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 pt-10 mt-2">
                                     <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
                                         <div className="relative w-full sm:w-auto">
@@ -177,7 +177,7 @@ export const BasketPage = () => {
                                 </div>
                             </div>
 
-                            {/* Basket Right (Sidebar) */}
+                            {/* Basket (Sidebar) */}
                             <div className="lg:w-[420px] xl:w-[480px] w-full sticky top-32">
                                 <div className="bg-[#F9FAFB] border border-gray-100 rounded-[32px] p-6 md:p-10 shadow-sm relative overflow-hidden">
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/40 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />

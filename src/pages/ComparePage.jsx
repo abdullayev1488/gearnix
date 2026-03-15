@@ -13,7 +13,6 @@ export const ComparePage = () => {
         <main className='pt-[80px]'>
             <section className="py-12 md:py-24 bg-[#FCFDFF]">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-                    {/* Breadcrumbs */}
                     <div className="flex items-center gap-2 text-[15px] text-gray-400 mb-12">
                         <Link to="/" className="hover:text-gray-900 transition-colors">Home</Link>
                         <span className="text-gray-300">/</span>

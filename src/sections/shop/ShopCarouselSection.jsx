@@ -24,7 +24,6 @@ export const ShopCarouselSection = () => {
     return (
         <section className="relative pb-12 md:pb-20 top-[-60px] overflow-x-hidden">
             <div className="container mx-auto px-10 md:px-4 relative">
-                {/* Custom Navigation Arrows */}
                 <button className="swiper-prev absolute left-1 md:left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white/90 rounded-full flex items-center justify-center shadow-md border border-gray-200 hover:bg-[#ff512f] hover:text-white transition-all cursor-pointer text-gray-600">
                     <IconChevronLeft size={20} />
                 </button>
@@ -61,7 +60,6 @@ export const ShopCarouselSection = () => {
                     {categories.map(category => (
                         <SwiperSlide key={category._id || category.id}>
                             <div className="flex flex-col items-center group cursor-pointer">
-                                {/* Circular Image Container */}
                                 <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden bg-gray-50 mb-6 border-4 border-transparent group-hover:border-[#ff512f]/10 transition-all duration-300 shadow-md">
                                     <img
                                         src={category.images?.shop || category.images?.home}
@@ -69,7 +67,6 @@ export const ShopCarouselSection = () => {
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
                                 </div>
-                                {/* Text Content */}
                                 <h3 className="font-orbitron !text-[14px] font-bold text-[#1A1A1A] mb-1 uppercase tracking-tight">
                                     {category.name}
                                 </h3>
