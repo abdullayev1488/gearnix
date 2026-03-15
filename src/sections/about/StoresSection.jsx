@@ -17,7 +17,6 @@ export const StoresSection = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                     {stores.map((store) => (
                         <div key={store.id} className="flex flex-col items-center group">
-                            {/* Image Container */}
                             <div className="w-full aspect-[4/3] rounded-[15px] overflow-hidden mb-6 shadow-sm group-hover:shadow-md transition-shadow">
                                 <img
                                     src={store.image}

@@ -30,7 +30,6 @@ export const ProductCard = ({ product }) => {
         }
         if (type === 'exchange') {
             dispatch(toggleCompare(product));
-            // If we are adding the second product, open the modal
             if (!isInCompare && compareItems.length === 1) {
                 dispatch(setCompareModalOpen(true));
             }
@@ -42,9 +41,7 @@ export const ProductCard = ({ product }) => {
             to={`/product/${product._id}`}
             className="group bg-white block rounded-2xl pb-2 cursor-pointer transition-all duration-300 hover:!shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:!-translate-y-1"
         >
-            {/* Image Container */}
             <div className="relative aspect-square rounded-2xl group-hover:rounded-b-none transition-all duration-300 bg-[#F6F7F9] flex items-center justify-center p-8 overflow-hidden">
-                {/* Action Buttons Overlay */}
                 <div className="absolute top-4 right-4 flex flex-col gap-2 z-20 transition-all duration-300 translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
                     <button
                         onClick={(e) => handleAction(e, 'wishlist')}
@@ -87,7 +84,6 @@ export const ProductCard = ({ product }) => {
                         </span>
                     </button>
                 </div>
-                {/* Badge */}
                 {(product.discount || product.badge) && (
                     <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-white text-[11px] font-bold z-10 ${product.discount ? 'bg-[#ff512f]' : 'bg-[#e91e63]'}`}>
                         {product.discount || product.badge}
@@ -101,7 +97,6 @@ export const ProductCard = ({ product }) => {
                 />
             </div>
 
-            {/* Info */}
             <div className="mt-5 text-center px-4 pb-4">
                 <h4 className="font-poppins font-semibold text-[15px] text-gray-800 line-clamp-1 mb-1 group-hover:text-black">
                     {product.name}

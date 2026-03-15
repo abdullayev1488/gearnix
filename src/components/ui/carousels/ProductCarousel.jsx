@@ -43,7 +43,7 @@ export const ProductCarousel = () => {
                     </p>
                 </div>
 
-                {/* Custom Arrows */}
+                {/* Arrows */}
                 <div className="flex gap-4">
                     <button
                         ref={prevRef}
@@ -90,7 +90,7 @@ export const ProductCarousel = () => {
                 ))}
             </Swiper>
 
-            {/* Pagination Dots at bottom left */}
+            {/* Pagination */}
             <div className="custom-pagination"></div>
         </section>
     );

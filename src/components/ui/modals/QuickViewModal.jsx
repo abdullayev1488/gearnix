@@ -49,7 +49,6 @@ export const QuickViewModal = ({ isOpen, onClose }) => {
                 </button>
 
                 <div className="flex flex-col md:flex-row h-full max-h-[90vh] overflow-y-auto">
-                    {/* Left Side: Image */}
                     <div className="md:w-1/2 bg-[#F6F7F9] flex items-center justify-center p-12 relative">
                         <img
                             src={selectedProduct.image}
@@ -63,7 +62,6 @@ export const QuickViewModal = ({ isOpen, onClose }) => {
                         )}
                     </div>
 
-                    {/* Right Side: Info */}
                     <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
                         <p className="text-[#ff512f] font-bold text-[13px] uppercase tracking-widest mb-3">
                             {selectedProduct.category?.name || "Gaming Gear"}

@@ -32,7 +32,6 @@ export const ShopContent = () => {
                 const res = await api.get('/product', { params });
                 setProducts(res.data.data?.products || []);
 
-                // Sync max range from backend
                 if (res.data.data?.pagination?.maxPrice) {
                     dispatch(setMaxRange(res.data.data.pagination.maxPrice));
                 }
@@ -45,7 +44,6 @@ export const ShopContent = () => {
         fetchProducts();
     }, [filters, sortBy]);
 
-    // Reset visible count when filters change
     useEffect(() => {
         setVisibleCount(9);
     }, [filters, sortBy]);
@@ -69,7 +67,7 @@ export const ShopContent = () => {
                         <FilterSidebar />
                     </div>
 
-                    {/* Mobile Sidebar Toggle */}
+                    {/* Mobile Sidebar */}
                     <div className="lg:hidden mb-10">
                         <button
                             onClick={() => setIsMobileSidebarOpen(true)}

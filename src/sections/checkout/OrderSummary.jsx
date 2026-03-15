@@ -27,20 +27,17 @@ export const OrderSummary = ({ formData }) => {
             return;
         }
 
-        // Validate basket
         if (basketItems.length === 0) {
             toast.error('Your basket is empty', { position: 'bottom-right' });
             return;
         }
 
-        // Validate required fields
         const { firstName, lastName, country, streetAddress, city, state, postcode, phone, email } = formData;
         if (!firstName || !lastName || !country || !streetAddress || !city || !state || !postcode || !phone || !email) {
             toast.error('Please fill in all required billing fields', { position: 'bottom-right' });
             return;
         }
 
-        // Validate terms
         if (!agreedTerms) {
             toast.error('Please agree to the terms and conditions', { position: 'bottom-right' });
             return;

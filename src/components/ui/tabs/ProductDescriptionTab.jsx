@@ -26,7 +26,6 @@ export const ProductDescriptionTab = () => {
 
             {/* Details Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 items-start pt-8">
-                {/* Left: Image */}
                 <div className="bg-[#f8f9fb] rounded-[24px] overflow-hidden aspect-square sm:aspect-[16/10] flex items-center justify-center border border-gray-100 shadow-sm relative group w-full h-full">
                     <img
                         src="/img/product-single.webp"
@@ -36,7 +35,6 @@ export const ProductDescriptionTab = () => {
                     <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/5 to-purple-500/5 pointer-events-none" />
                 </div>
 
-                {/* Right: Item Specifics */}
                 <div className="space-y-4">
                     <h3 className="text-[22px] text-start font-orbitron font-bold text-gray-900 tracking-wide">
                         Item specifics

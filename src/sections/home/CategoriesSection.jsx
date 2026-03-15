@@ -31,13 +31,11 @@ export const CategoriesSection = () => {
                 {staticCategories.map((category, index) => (
                     <div key={index} className="flex flex-col items-center md:items-start group">
                         <div className="relative w-full h-[220px] flex items-center justify-center cursor-pointer">
-                            {/* Colored Background Box */}
                             <div
                                 style={{ background: colors[index % colors.length] }}
                                 className='absolute bottom-0 w-full h-[180px] rounded-2xl transition-all duration-500 group-hover:shadow-2xl group-hover:opacity-90'
                             />
 
-                            {/* Protruding Image */}
                             <div className='relative z-10 w-full h-full flex items-center justify-center pointer-events-none'>
                                 <img
                                     src={category.img}

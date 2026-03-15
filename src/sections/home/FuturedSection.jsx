@@ -6,7 +6,6 @@ import { FuturedModal } from '@/components/ui/modals/FuturedModal';
 export const FuturedSection = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Prevent scrolling when modal is open
     useEffect(() => {
         if (isModalOpen) {
             document.body.style.overflow = 'hidden';
@@ -16,7 +15,6 @@ export const FuturedSection = () => {
         return () => { document.body.style.overflow = 'unset'; };
     }, [isModalOpen]);
 
-    // Handle ESC key
     useEffect(() => {
         const handleEsc = e => {
             if (e.key === 'Escape') setIsModalOpen(false);
@@ -28,7 +26,6 @@ export const FuturedSection = () => {
     return (
         <section className='py-16 max-w-screen-2xl mx-auto px-4 overflow-hidden'>
             <div className="flex flex-col gap-2">
-                {/* Row 1 */}
                 <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
                     <div className="w-full lg:w-1/2 relative group rounded-2xl overflow-hidden shadow-2xl">
                         <img
@@ -60,9 +57,7 @@ export const FuturedSection = () => {
                     </div>
                 </div>
 
-                {/* Row 2 */}
                 <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-10">
-                    {/* Reverse order on mobile: Image on top, Text below */}
                     <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
                         <h2 className="text-[30px] lg:text-[40px] font-orbitron font-[500] text-gray-900 leading-tight mb-6">
                             Eclipse Nexus Renegade <br /> Tactical Peripherals

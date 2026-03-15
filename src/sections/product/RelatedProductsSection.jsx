@@ -27,24 +27,17 @@ export const RelatedProductsSection = () => {
     }, []);
 
     if (loading) return null;
-
-    // Show a selection of products as "related"
     const relatedProducts = products;
 
     return (
         <section className="py-20 max-w-screen-2xl mx-auto px-4 overflow-hidden relative border-t border-gray-50">
-            {/* Header with Tab Style Title */}
             <div className="flex items-center justify-between mb-16">
                 <div className="relative group">
                     <h2 className="text-[17px] font-orbitron font-bold uppercase tracking-wider text-gray-900 pb-4 relative z-10 transition-all">
                         Related Products
                     </h2>
-
-                    {/* Background Highlight */}
                     <div className="absolute top-[10px] left-[-4px] right-[-4px] h-[15px] bg-[#FFDBEE] -z-10 blur-[1px] rounded-[3px]" />
                 </div>
-
-                {/* Custom Pagination Container */}
                 <div className="related-pagination flex justify-end !static !w-auto"></div>
             </div>
 
@@ -76,8 +69,7 @@ export const RelatedProductsSection = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-
-            {/* Navigation Buttons Below */}
+            
             <div className="flex justify-center gap-4 mt-12">
                 <button
                     className="related-prev w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-[#f551b8] hover:border-[#f551b8] hover:text-white transition-all duration-300 shadow-sm"

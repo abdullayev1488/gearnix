@@ -20,7 +20,6 @@ export const ProductTabsSection = ({ product }) => {
                         {activeTab === 'description' && (
                             <div className="absolute bottom-0 left-0 w-full h-[6px] bg-[#f551b8] shadow-[0_0_15px_rgba(245,81,184,0.4)]" />
                         )}
-                        {/* Hover Highlight (matches previous user adjustment but refined) */}
                         <div className="absolute top-[2px] left-[-4px] right-[-4px] h-[15px] bg-[#FFDBEE] -z-10 blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity active:opacity-100 rounded-full" />
                     </button>
                     <button

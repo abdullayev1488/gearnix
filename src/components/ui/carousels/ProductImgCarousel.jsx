@@ -19,7 +19,7 @@ export const ProductImgCarousel = ({
 }) => {
     return (
         <div className="lg:sticky lg:top-32 lg:row-span-2 flex flex-col-reverse sm:flex-row gap-4 min-h-0 mb-10 lg:mb-0">
-            {/* Thumbnails Sidebar */}
+            {/* Sidebar */}
             <div className="flex sm:flex-col gap-3 min-w-[80px]">
                 {images.map((img, index) => (
                     <button
@@ -32,7 +32,6 @@ export const ProductImgCarousel = ({
                 ))}
             </div>
 
-            {/* Main Image View with Swiper */}
             <div className="flex-1 bg-white border border-gray-100 rounded-[8px] overflow-hidden shadow-sm relative group h-fit">
                 <Swiper
                     modules={[Navigation, Thumbs]}
@@ -52,7 +51,6 @@ export const ProductImgCarousel = ({
                     ))}
                 </Swiper>
 
-                {/* Custom Navigation Arrows */}
                 <button
                     onClick={() => swiper?.slidePrev()}
                     className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white border border-gray-100 shadow-lg flex items-center justify-center text-gray-400 hover:text-gray-900 transition-all cursor-pointer opacity-0 group-hover:opacity-100"

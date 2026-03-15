@@ -13,9 +13,6 @@ export const ClientsCarousel = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [swiperInstance, setSwiperInstance] = useState(null);
 
-
-
-    // Robust navigation initialization
     useEffect(() => {
         if (swiperInstance && prevRef.current && nextRef.current) {
             swiperInstance.params.navigation.prevEl = prevRef.current;
@@ -62,7 +59,7 @@ export const ClientsCarousel = () => {
                                         alt={`Client Video ${vid.id}`}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
-                                    {/* Play Button Overlay */}
+                                    {/* Overlay */}
                                     <div className="absolute inset-0 bg-black/10 flex items-center justify-center group-hover:bg-black/30 transition-all duration-300">
                                         <div className="w-14 h-14 rounded-full border border-white/60 flex items-center justify-center text-white backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
                                             <IconPlayerPlayFilled size={24} />
@@ -73,7 +70,7 @@ export const ClientsCarousel = () => {
                         ))}
                     </Swiper>
 
-                    {/* Navigation Arrows - Bottom Center */}
+                    {/* Navigation Arrows */}
                     <div className="flex gap-4 absolute bottom-[-100px] left-1/2 -translate-x-1/2 z-10">
                         <button
                             ref={prevRef}

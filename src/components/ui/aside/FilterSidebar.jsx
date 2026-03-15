@@ -5,13 +5,12 @@ import RangeSlider from '@/components/custom/RangeSlider';
 import api from '@/axios/axios';
 import {
     setCategory,
-    toggleBrand,
-    toggleColor
+    toggleBrand
 } from '@/redux/slice/filterSlice';
 
 export const FilterSidebar = () => {
     const dispatch = useDispatch();
-    const { filters, maxRange } = useSelector(state => state.filter);
+    const { filters } = useSelector(state => state.filter);
     const [categories, setCategories] = useState([]);
     const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(true);

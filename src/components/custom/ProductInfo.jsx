@@ -50,8 +50,7 @@ export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
                 </div>
                 {product.stock} In stock
             </div>
-
-            {/* Interaction Bar */}
+            {/* Counter */}
             <div className="flex items-center gap-4">
                 <div className="flex items-center bg-[#f0f0f0] rounded-lg p-[3px]">
                     <button onClick={() => handleQuantityChange('dec')} className="p-3 text-gray-500 hover:text-gray-900 cursor-pointer transition-colors">
@@ -78,14 +77,12 @@ export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
                 </button>
             </div>
 
-            {/* Buy It Now Button */}
             <button
                 onClick={() => navigate('/checkout')}
                 className="w-full h-[54px] rounded-full bg-gradient-to-r from-[#b851f5] to-[#f551b8] text-white font-bold text-[15px] tracking-[0.1em] shadow-lg shadow-pink-200 hover:brightness-105 cursor-pointer transition-all">
                 Buy It Now
             </button>
 
-            {/* Guarantee Section */}
             <div className="bg-[#f8f9fb] p-8 rounded-[12px] text-center border border-gray-50 mt-4">
                 <div className="text-[14px] font-bold text-gray-900 uppercase tracking-widest mb-6">Guarantee safe & secure checkout</div>
                 <div className="flex items-center justify-center gap-6 flex-wrap">
@@ -96,7 +93,6 @@ export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
                 </div>
             </div>
 
-            {/* Delivery Info */}
             <div className="space-y-4 pt-2">
                 <div className="flex items-center gap-3 text-[15px] text-gray-600">
                     <IconClock size={20} className="text-gray-900" />
@@ -108,7 +104,6 @@ export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
                 </div>
             </div>
 
-            {/* Metadata Section */}
             <div className="pt-8 border-t border-gray-100 space-y-3 text-[14px]">
                 <div><span className="text-gray-900 font-bold uppercase tracking-widest mr-2">SKU:</span> <span className="text-gray-500 font-medium">{product.sku || 'N/A'}</span></div>
                 <div><span className="text-gray-900 font-bold uppercase tracking-widest mr-2">Category:</span> <span className="text-gray-500 font-medium">{product.category?.name || 'Uncategorized'}</span></div>

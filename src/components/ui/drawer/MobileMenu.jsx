@@ -65,7 +65,7 @@ export const MobileMenu = () => {
                         ))}
                     </ul>
 
-                    {/* Contact & Socials */}
+                    {/* Contact */}
                     <div className="mt-auto pt-10 border-t border-gray-100">
                         <div className="flex flex-col gap-2 mb-6">
                             <p className="text-[13px] font-bold text-[#1c1c1c] font-poppins">

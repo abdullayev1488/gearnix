@@ -75,7 +75,7 @@ export const Basket = () => {
                                 </p>
                             </div>
 
-                            {/* Cart Items */}
+                            {/* Cart */}
                             <div className="space-y-4">
                                 {basketItems.map((item) => (
                                     <div key={item._id} className="flex gap-3 p-3 border border-gray-100 rounded-xl relative group bg-white shadow-sm">

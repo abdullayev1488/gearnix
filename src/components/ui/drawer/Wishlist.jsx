@@ -122,7 +122,6 @@ export const Wishlist = () => {
                     )}
                 </div>
 
-                {/* Footer Tip */}
                 {wishlistItems.length > 0 && (
                     <div className="p-4 bg-gray-50 border-t border-gray-100 text-center">
                         <p className="text-[10px] text-gray-500">

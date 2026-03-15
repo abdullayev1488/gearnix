@@ -15,7 +15,6 @@ export const ProductReviewsTab = ({ productName = "IMMERSION XTREME PRO" }) => {
                 </h3>
             </div>
 
-            {/* Form Instructions */}
             <p className="text-[14px] text-gray-500 font-medium">
                 Your email address will not be published. Required fields are marked *
             </p>
@@ -43,7 +42,7 @@ export const ProductReviewsTab = ({ productName = "IMMERSION XTREME PRO" }) => {
                 </div>
             </div>
 
-            {/* Form Fields */}
+            {/* Form */}
             <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
                 <div className="space-y-3">
                     <label className="text-[15px] font-bold text-gray-900">Your review *</label>

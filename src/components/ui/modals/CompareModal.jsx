@@ -53,9 +53,6 @@ export const CompareModal = ({ isOpen, onClose }) => {
                 <div className="flex-1 overflow-auto p-4 md:p-8">
                     {compareItems.length > 0 ? (
                         <div className="grid grid-cols-[150px_1fr_1fr] md:grid-cols-[200px_1fr_1fr] border border-gray-100 rounded-2xl overflow-hidden min-w-[600px]">
-                            {/* Comparison Rows */}
-
-                            {/* Images & Title */}
                             <div className="bg-gray-50/50 p-6 flex items-center border-b border-gray-100">
                                 <span className="font-orbitron font-bold text-[11px] uppercase tracking-widest text-gray-400">Product</span>
                             </div>

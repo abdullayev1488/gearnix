@@ -1,8 +1,6 @@
 import { NewsCard } from '@/components/ui/cards/NewsCard'
 
 export const NewsSection = () => {
-
-
     return (
         <section className='py-20 max-w-screen-2xl mx-auto px-4'>
             <div className="mb-12">

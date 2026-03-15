@@ -1,15 +1,10 @@
 import { Button } from "@/components/custom/Button"
-
 export const HeroSection = () => {
-
     return (
         <section
             className="w-full h-[105vh] bg-cover bg-center bg-no-repeat flex items-center relative overflow-hidden"
-            style={{ backgroundImage: "url('/img/heroBg.jpg')" }}
-        >
-            {/* White overlay to make the background "lighter" */}
+            style={{ backgroundImage: "url('/img/heroBg.jpg')" }}>
             <div className="absolute inset-0" />
-
             <div data-aos="fade-right" className="max-w-screen-2xl mx-auto px-4 w-full relative z-10">
                 <article className="max-w-xl text-[#333]">
                     <h1 className="text-3xl sm:text-4xl md:text-[44px] font-bold font-orbitron leading-[1.2]">

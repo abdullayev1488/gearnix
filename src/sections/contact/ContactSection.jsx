@@ -63,7 +63,6 @@ export const ContactSection = () => {
             <div className="container mx-auto px-4">
                 <div className="flex flex-col lg:flex-row gap-16">
 
-                    {/* Left Column: Form */}
                     <div className="flex-1">
                         <h2 className="text-[28px] md:text-[30px] font-orbitron font-bold text-gray-900 mb-4 tracking-wider">
                             GET IN TOUCH
@@ -146,7 +145,6 @@ export const ContactSection = () => {
                         </form>
                     </div>
 
-                    {/* Right Column: Info */}
                     <div className="lg:w-[400px] space-y-10 pt-10 lg:pt-24">
                         <div className="space-y-6">
                             <p className="font-poppins text-sm text-gray-800 leading-relaxed">
