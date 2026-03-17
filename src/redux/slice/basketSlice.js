@@ -27,6 +27,7 @@ const basketSlice = createSlice({
             localStorage.setItem('basket', JSON.stringify(state.items));
             toast.error('Item removed from basket');
         },
+        
         updateQuantity: (state, action) => {
             const { id, quantity } = action.payload;
 

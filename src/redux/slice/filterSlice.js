@@ -6,7 +6,6 @@ const initialState = {
         priceRange: [0, 500],
         brands: [],
         rating: null,
-        colors: [],
     },
     sortBy: 'default',
     viewType: 'grid-3',
@@ -44,14 +43,6 @@ const filterSlice = createSlice({
         setRating: (state, action) => {
             state.filters.rating = action.payload;
         },
-        toggleColor: (state, action) => {
-            const color = action.payload;
-            if (state.filters.colors.includes(color)) {
-                state.filters.colors = state.filters.colors.filter(c => c !== color);
-            } else {
-                state.filters.colors.push(color);
-            }
-        },
         setSortBy: (state, action) => {
             state.sortBy = action.payload;
         },
@@ -70,7 +61,6 @@ export const {
     setMaxRange,
     toggleBrand,
     setRating,
-    toggleColor,
     setSortBy,
     setViewType,
     resetFilters,

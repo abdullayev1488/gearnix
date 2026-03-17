@@ -5,7 +5,7 @@ import { FilterSidebar } from '@/components/ui/aside/FilterSidebar';
 import { ProductCard } from '@/components/ui/cards/ProductCard';
 import { sortOptions } from '@/const';
 import api from '@/axios/axios';
-import { setSortBy, setViewType, setMaxRange } from '@/redux/slice/filterSlice';
+import { setSortBy, setViewType, setMaxRange, resetFilters } from '@/redux/slice/filterSlice';
 
 export const ShopContent = () => {
     const dispatch = useDispatch();
@@ -178,7 +178,12 @@ export const ShopContent = () => {
                                 ) : (
                                     <div className="bg-white rounded-[32px] p-20 text-center border border-dashed border-gray-200">
                                         <p className="text-gray-400 font-medium text-[16px]">No products found matching your filters.</p>
-                                        <button className="mt-6 text-[#ff0080] font-bold uppercase text-[13px] tracking-[0.1em] hover:underline transition-all">Clear all filters</button>
+                                        <button 
+                                            onClick={() => dispatch(resetFilters())}
+                                            className="mt-6 text-[#ff0080] cursor-pointer font-bold uppercase text-[13px] tracking-[0.1em] hover:underline transition-all"
+                                        >
+                                            Clear all filters
+                                        </button>
                                     </div>
                                 )}
 
