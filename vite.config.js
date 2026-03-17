@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     port: 9000,
     host: true,
-    allowedHosts:['gearnix.elmancode.site']
+    allowedHosts:['gearnix.elmandev.site']
   },
   
   plugins: [react(), tailwindcss()],
