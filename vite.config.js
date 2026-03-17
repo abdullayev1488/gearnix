@@ -8,7 +8,9 @@ export default defineConfig({
   server: {
     port: 9000,
     host: true,
+    allowedHosts:['gearnix.elmancode.site']
   },
+  
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
