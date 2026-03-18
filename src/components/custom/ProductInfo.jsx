@@ -12,7 +12,7 @@ import {
 import { addItem } from '@/redux/slice/basketSlice';
 import { toggleWishlist } from '@/redux/slice/wishlistSlice';
 import { toggleCompare } from '@/redux/slice/compareSlice';
-import { setCompareModalOpen } from '@/redux/slice/uiSlice';
+import { setCompareModalOpen, setAuthOpen } from '@/redux/slice/uiSlice';
 import { useNavigate } from 'react-router';
 
 export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
@@ -32,25 +32,20 @@ export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
     };
     return (
         <div className="flex-1 space-y-7">
-            {/* Title & Price */}
             <div className="space-y-4">
                 <h2 className="font-orbitron font-bold text-[27px] text-gray-900">{product.name}</h2>
                 <div className="text-[30px] font-bold text-gray-900">${product.price.toFixed(2)}</div>
             </div>
 
-            {/* Description */}
             <p className="text-gray-600 text-[15px] leading-relaxed font-medium">
                 {product.description}
             </p>
-
-            {/* Stock */}
             <div className="flex items-center gap-2 text-green-500 font-bold text-[14px]">
                 <div className="w-5 h-5 rounded-full border-2 border-green-500 flex items-center justify-center">
                     <IconCheck size={12} strokeWidth={4} />
                 </div>
                 {product.stock} In stock
             </div>
-            {/* Counter */}
             <div className="flex items-center gap-4">
                 <div className="flex items-center bg-[#f0f0f0] rounded-lg p-[3px]">
                     <button onClick={() => handleQuantityChange('dec')} className="p-3 text-gray-500 hover:text-gray-900 cursor-pointer transition-colors">
@@ -78,7 +73,18 @@ export const ProductInfo = ({ product, quantity, handleQuantityChange }) => {
             </div>
 
             <button
-                onClick={() => navigate('/checkout')}
+                onClick={() => {
+                    const token = localStorage.getItem('token');
+                    if (!token) {
+                        // navigate('/');
+                        dispatch(setAuthOpen(true));
+                        import('react-hot-toast').then(({ default: toast }) => {
+                            toast.error("You must be logged in to place an order.");
+                        });
+                    } else {
+                        navigate('/checkout');
+                    }
+                }}
                 className="w-full h-[54px] rounded-full bg-gradient-to-r from-[#b851f5] to-[#f551b8] text-white font-bold text-[15px] tracking-[0.1em] shadow-lg shadow-pink-200 hover:brightness-105 cursor-pointer transition-all">
                 Buy It Now
             </button>

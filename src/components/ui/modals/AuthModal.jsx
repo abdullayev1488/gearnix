@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 import api from "@/axios/axios";
 import { Eye, EyeOff } from "lucide-react";
 
-// Zod schemas
 const registerSchema = z.object({
     username: z.string().min(3, "Username must be at least 3 characters"),
     email: z.string().email("Please enter a valid email address"),
@@ -30,7 +29,6 @@ export const AuthModal = () => {
 
     const closeModal = () => dispatch(setAuthOpen(false));
 
-    // Reset forms when modal closes
     useEffect(() => {
         if (!isOpen) {
             loginFormik.resetForm();
@@ -38,7 +36,6 @@ export const AuthModal = () => {
         }
     }, [isOpen]);
 
-    // Register formik
     const registerFormik = useFormik({
         initialValues: { username: "", email: "", password: "" },
         validationSchema: toFormikValidationSchema(registerSchema),
@@ -46,10 +43,9 @@ export const AuthModal = () => {
             try {
                 const { data } = await api.post("/auth/register", values);
                 if (data.success) {
-                    dispatch(setUser({ user: data.data.user, token: data.data.token }));
                     resetForm();
-                    closeModal();
-                    toast.success("Registration successful! Welcome aboard 🎉", {
+                    setActiveTab("login");
+                    toast.success("Registration successful! Please login with your email and password. 🎉", {
                         position: "bottom-right",
                     });
                 }
@@ -66,7 +62,6 @@ export const AuthModal = () => {
         },
     });
 
-    // Login formik
     const loginFormik = useFormik({
         initialValues: { email: "", password: "" },
         validationSchema: toFormikValidationSchema(loginSchema),
@@ -114,12 +109,10 @@ export const AuthModal = () => {
                 : "opacity-0 invisible pointer-events-none"
                 }`}
         >
-            {/* Container */}
             <div
                 className="relative w-full max-w-[420px] bg-white rounded-[30px] p-8 md:p-10 shadow-2xl animate-in fade-in zoom-in duration-300"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Close button */}
                 <button
                     onClick={closeModal}
                     className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors cursor-pointer text-gray-400 hover:text-black"
@@ -127,7 +120,6 @@ export const AuthModal = () => {
                     ✕
                 </button>
 
-                {/* Tabs */}
                 <div className="flex bg-[#f3f3f3] p-2 rounded-full mb-8 font-poppins">
                     <button
                         onClick={() => handleTabSwitch("login")}
@@ -149,7 +141,6 @@ export const AuthModal = () => {
                     </button>
                 </div>
 
-                {/* Content */}
                 {activeTab === "login" ? (
                     <div
                         className="animate-in slide-in-from-bottom-2 duration-500 font-poppins"
@@ -215,23 +206,6 @@ export const AuthModal = () => {
                                             {loginFormik.errors.password}
                                         </p>
                                     )}
-                            </div>
-                            <div className="flex items-center justify-between text-[11px] py-1">
-                                <label className="flex items-center gap-2 cursor-pointer group">
-                                    <input
-                                        type="checkbox"
-                                        className="w-4 h-4 border-gray-200 rounded accent-black cursor-pointer transition-all"
-                                    />
-                                    <span className="text-black font-medium group-hover:text-gray-600 transition-colors">
-                                        Remember me
-                                    </span>
-                                </label>
-                                <a
-                                    href="#"
-                                    className="text-black font-medium hover:text-gray-600 transition-all duration-300 underline-offset-2 hover:underline cursor-pointer"
-                                >
-                                    Lost your password?
-                                </a>
                             </div>
                             <button
                                 type="submit"

@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { useEffect } from 'react';

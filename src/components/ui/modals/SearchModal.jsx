@@ -29,7 +29,6 @@ export const SearchModal = () => {
     const inputRef = useRef(null);
     const debouncedQuery = useDebounce(searchQuery, 400);
 
-    // Focus input when modal opens
     useEffect(() => {
         if (isOpen) {
             setTimeout(() => inputRef.current?.focus(), 150);

@@ -28,7 +28,6 @@ export const Footer = () => {
       <div className="max-w-screen-2xl mx-auto px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
 
-          {/* Brand Area */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-6">
               <img src="/img/Logo.webp" alt="logo" className="w-40" />
@@ -52,7 +51,6 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Links Area */}
           {footerLinks.map((column, index) => (
             <div key={index} className="lg:col-span-1">
               <h4 className="font-orbitron font-bold text-[17px] text-gray-900 mb-8 tracking-wider whitespace-nowrap">
@@ -72,7 +70,6 @@ export const Footer = () => {
             </div>
           ))}
 
-          {/* Newsletter Area */}
           <div className="lg:col-span-1">
             <h4 className="font-orbitron font-bold text-[17px] text-gray-900 mb-8 tracking-wider">
               Newsletters
@@ -103,7 +100,6 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Footer Copyright */}
         <div className="pt-7 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-sm text-gray-500 font-poppins italic">
             Copyright © 2024 RisingBamboo. All Rights Reserved.

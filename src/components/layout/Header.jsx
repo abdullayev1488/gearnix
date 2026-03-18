@@ -40,7 +40,6 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close dropdown
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -51,7 +50,6 @@ export const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Handle icon click
   const handleIconClick = (name) => {
     if (name === "basket") dispatch(setBasketOpen(true));
     if (name === "user") {
@@ -75,7 +73,6 @@ export const Header = () => {
       <nav className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-lg py-5" : "bg-transparent py-5"}`}>
         <div className="max-w-screen-2xl mx-auto px-4 flex items-center justify-between transition-all duration-300">
 
-          {/* Logo */}
           <div className="flex items-center gap-4">
             <button
               onClick={() => dispatch(setMobileMenuOpen(true))}
@@ -106,7 +103,6 @@ export const Header = () => {
             ))}
           </ul>
 
-          {/* Desktop Icons */}
           <div className="flex gap-1 sm:gap-4 text-gray-700">
             {navIcons.map((item) => (
               <div
@@ -126,7 +122,6 @@ export const Header = () => {
                   )}
                 </div>
 
-                {/* User Dropdown */}
                 {item.name === "user" && user && userDropdownOpen && (
                   <div className="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 py-3 z-[999] animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="px-4 py-3 border-b border-gray-100">

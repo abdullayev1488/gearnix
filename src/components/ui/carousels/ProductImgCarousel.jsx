@@ -3,7 +3,6 @@ import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper/modules';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
@@ -19,7 +18,6 @@ export const ProductImgCarousel = ({
 }) => {
     return (
         <div className="lg:sticky lg:top-32 lg:row-span-2 flex flex-col-reverse sm:flex-row gap-4 min-h-0 mb-10 lg:mb-0">
-            {/* Sidebar */}
             <div className="flex sm:flex-col gap-3 min-w-[80px]">
                 {images.map((img, index) => (
                     <button

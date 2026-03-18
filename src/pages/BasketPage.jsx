@@ -1,10 +1,12 @@
 import { IconPlus, IconMinus, IconTrash, IconTruck, IconChevronRight, IconShoppingCart } from "@tabler/icons-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem, updateQuantity } from "@/redux/slice/basketSlice";
+import { setAuthOpen } from "@/redux/slice/uiSlice";
 
 export const BasketPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { items: basketItems } = useSelector((state) => state.basket);
 
     const subtotal = basketItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -223,9 +225,23 @@ export const BasketPage = () => {
                                                 <span className="text-xl lg:text-2xl font-orbitron font-bold text-[#ff512f]">${total.toFixed(2)}</span>
                                             </div>
 
-                                            <Link to="/checkout" className="w-full bg-gradient-to-r from-[#ff512f] to-[#dd2476] text-white font-orbitron font-bold py-5 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-[#ff512f]/30 hover:shadow-[#ff512f]/50 hover:scale-[1.02] transform transition-all duration-300 active:scale-95 cursor-pointer uppercase tracking-widest text-[12px] lg:text-[13px]">
+                                            <button
+                                                onClick={() => {
+                                                    const token = localStorage.getItem('token');
+                                                    if (!token) {
+                                                        // navigate('/');
+                                                        dispatch(setAuthOpen(true));
+                                                        import('react-hot-toast').then(({ default: toast }) => {
+                                                            toast.error("You must be logged in to place an order.");
+                                                        });
+                                                    } else {
+                                                        navigate('/checkout');
+                                                    }
+                                                }}
+                                                className="w-full bg-gradient-to-r from-[#ff512f] to-[#dd2476] text-white font-orbitron font-bold py-5 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-[#ff512f]/30 hover:shadow-[#ff512f]/50 hover:scale-[1.02] transform transition-all duration-300 active:scale-95 cursor-pointer uppercase tracking-widest text-[12px] lg:text-[13px]"
+                                            >
                                                 Proceed To Checkout
-                                            </Link>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

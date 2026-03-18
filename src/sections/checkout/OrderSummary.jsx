@@ -20,7 +20,6 @@ export const OrderSummary = ({ formData }) => {
     const total = subtotal + shipping;
 
     const handlePlaceOrder = async () => {
-        // Check login
         if (!user) {
             toast.error('Please login to place an order', { position: 'bottom-right' });
             dispatch(setAuthOpen(true));

@@ -11,12 +11,10 @@ const RangeSlider = () => {
 
     const debouncedValue = useDebounce(localValue, 500);
 
-    // Sync local state with Redux state (e.g., if filters are cleared)
     useEffect(() => {
         setLocalValue(filters.priceRange);
     }, [filters.priceRange]);
 
-    // Dispatch Redux action when debounced value changes
     useEffect(() => {
         if (debouncedValue[0] !== filters.priceRange[0] || debouncedValue[1] !== filters.priceRange[1]) {
             dispatch(setPriceRange(debouncedValue));

@@ -1,7 +1,7 @@
 import { IconX, IconTrash, IconPlus, IconMinus, IconTruck, IconShoppingCart } from "@tabler/icons-react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { setBasketOpen } from "@/redux/slice/uiSlice";
+import { setBasketOpen, setAuthOpen } from "@/redux/slice/uiSlice";
 import { removeItem, updateQuantity } from "@/redux/slice/basketSlice";
 
 export const Basket = () => {
@@ -158,7 +158,16 @@ export const Basket = () => {
                             <button
                                 onClick={() => {
                                     dispatch(setBasketOpen(false));
-                                    navigate('/checkout');
+                                    const token = localStorage.getItem('token');
+                                    if (!token) {
+                                        // navigate('/');
+                                        dispatch(setAuthOpen(true));
+                                        import('react-hot-toast').then(({ default: toast }) => {
+                                            toast.error("You must be logged in to place an order.");
+                                        });
+                                    } else {
+                                        navigate('/checkout');
+                                    }
                                 }}
                                 className="w-full py-3.5 bg-gradient-to-r from-[#ff512f] to-[#dd2476] text-white rounded-lg font-orbitron font-bold hover:shadow-lg transition-all uppercase text-[10px] tracking-widest cursor-pointer text-center"
                             >

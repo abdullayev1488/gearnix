@@ -63,7 +63,6 @@ export const FilterSidebar = () => {
                     <h2 className="font-orbitron font-bold text-[20px] uppercase tracking-[0.1em] text-gray-900">Filter By</h2>
                 </div>
 
-                {/* Categories */}
                 <FilterSection title="Categories">
                     <ul className="space-y-4">
                         {categories.map((cat) => (
@@ -81,12 +80,9 @@ export const FilterSidebar = () => {
                     </ul>
                 </FilterSection>
 
-                {/* Price */}
                 <FilterSection title="Price">
                     <RangeSlider />
                 </FilterSection>
-
-                {/* Brands */}
                 <FilterSection title="Brands">
                     <ul className="space-y-4">
                         {brands.map((brand) => (

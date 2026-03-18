@@ -8,7 +8,6 @@ const api = axios.create({
     timeout: 10000,
 });
 
-// Request
 api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
@@ -22,7 +21,6 @@ api.interceptors.request.use(
     }
 );
 
-// Response
 api.interceptors.response.use(
     (response) => response,
     (error) => {

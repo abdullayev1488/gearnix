@@ -1,6 +1,5 @@
 import {
   IconUser,
-  // IconHeart,
   IconStar,
   IconSearch,
   IconBrandX,
