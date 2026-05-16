@@ -281,7 +281,348 @@ export const contactSocials = [
 export const sortOptions = [
   { label: 'Default sorting', value: 'default' },
   { label: 'Sort by high rating', value: 'rating' },
-  { label: 'Sort by low rating', value: 'latest' },
+  { label: 'Sort by low rating', value: 'rating-low' },
   { label: 'Sort by price: low to high', value: 'price-low' },
   { label: 'Sort by price: high to low', value: 'price-high' },
+];
+
+
+const brands = [
+  {
+    name: "Razer",
+    image: "/img/brands/razer-logo.png",
+    status: true,
+  },
+  {
+    name: "Logitech",
+    image: "/img/brands/logitech-logo.png",
+    status: true,
+  },
+  {
+    name: "SteelSeries",
+    image: "/img/brands/steelseries-logo.png",
+    status: true,
+  },
+  {
+    name: "HyperX",
+    image: "/img/brands/hyperx-logo.png",
+    status: true,
+  },
+  {
+    name: "Corsair",
+    image: "/img/brands/corsair-logo.png",
+    status: true,
+  },
+  {
+    name: "Redragon",
+    image: "/img/brands/redragon-logo.png",
+    status: true,
+  },
+];
+
+export const categories = [
+  {
+    name: "Gaming Keyboards",
+    images: {
+      shop: "/img/ShopPageCarouselimg5.webp",
+      home: "/img/img-2-1.png",
+    },
+    status: true,
+  },
+  {
+    name: "Gaming Mouse",
+    images: {
+      shop: "/img/ShopPageCarouselimg4.webp",
+      home: "/img/img-2-2.png",
+    },
+    status: true,
+  },
+  {
+    name: "Headset Gaming",
+    images: {
+      shop: "/img/ShopPageCarouselimg1.webp",
+      home: "/img/img-2-3.png",
+    },
+    status: true,
+  },
+  {
+    name: "Gaming Controllers",
+    images: {
+      shop: "/img/ShopPageCarouselimg3.webp",
+      home: "/img/img-2-4.png",
+    },
+    status: true,
+  },
+  {
+    name: "Accessories",
+    images: {
+      shop: "/img/ShopPageCarouselimg2.webp",
+    },
+    status: true,
+  },
+  {
+    name: "Wireless headset",
+    images: {
+      shop: "/img/ShopPageCarouselimg6.webp",
+    },
+    status: true,
+  },
+];
+export const products = [
+  {
+    name: "Aurora Glide Wireless Mouse",
+    image: "/img/product/1.png",
+    price: 90,
+    oldPrice: 99,
+    rating: 4,
+    reviews: 1,
+    status: true,
+    category: "68277c9f4e1a8f2d12345671"
+  },
+  {
+    name: "Azer BlackWidow V3",
+    image: "/img/product/2.webp",
+    price: 16,
+    oldPrice: 19,
+    rating: 4.5,
+    reviews: 2,
+    status: true,
+    category: "68277c9f4e1a8f2d12345672"
+  },
+  {
+    name: "Eclipse RGB Gaming Mouse",
+    image: "/img/product/3.webp",
+    price: 33,
+    oldPrice: 44,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345671"
+  },
+  {
+    name: "Eclipse Vortex",
+    image: "/img/product/4.webp",
+    price: 65,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345673"
+  },
+  {
+    name: "Galaxy Striker",
+    image: "/img/product/5.png",
+    price: 15,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345674"
+  },
+  {
+    name: "Gaming Logi G Pro X",
+    image: "/img/product/6.webp",
+    price: 38,
+    rating: 4,
+    reviews: 1,
+    status: true,
+    category: "68277c9f4e1a8f2d12345675"
+  },
+  {
+    name: "Green Broccoli",
+    image: "/img/product/7.webp",
+    price: 8,
+    oldPrice: 9,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345676"
+  },
+  {
+    name: "Immersion Xtreme",
+    image: "/img/product/8.webp",
+    price: 19,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345677"
+  },
+  {
+    name: "Immersion Xtreme Pro",
+    image: "/img/product/9.webp",
+    price: 50,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345677"
+  },
+  {
+    name: "Inferno Fusion",
+    image: "/img/product/10.webp",
+    price: 15,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345678"
+  },
+  {
+    name: "Itan X Gaming Headset",
+    image: "/img/product/11.webp",
+    price: 13,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345675"
+  },
+  {
+    name: "MK5 Module Breeze Nexus",
+    image: "/img/product/12.png",
+    price: 56,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345679"
+  },
+  {
+    name: "Nebula Quantum Bluetooth",
+    image: "/img/product/13.png",
+    price: 22,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d1234567a"
+  },
+  {
+    name: "Nebula Ranger",
+    image: "/img/product/14.webp",
+    price: 32,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d1234567b"
+  },
+  {
+    name: "Onyx Enforcer",
+    image: "/img/product/15.webp",
+    price: 18,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d1234567c"
+  },
+  {
+    name: "Onyx Predator",
+    image: "/img/product/16.webp",
+    price: 44,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d1234567c"
+  },
+  {
+    name: "PG2 Console Pro Nexus",
+    image: "/img/product/17.webp",
+    price: 18,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d1234567d"
+  },
+  {
+    name: "PG4 Console Zephyr Confluence",
+    image: "/img/product/18.png",
+    price: 39,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d1234567d"
+  },
+  {
+    name: "Phantom Elite Headset Pro",
+    image: "/img/product/19.webp",
+    price: 52,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345675"
+  },
+  {
+    name: "Precision Alpha",
+    image: "/img/product/20.webp",
+    price: 30,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345671"
+  },
+  {
+    name: "Pulsar Phantom",
+    image: "/img/product/21.webp",
+    price: 32,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345671"
+  },
+  {
+    name: "Quantum Click Precision Mouse",
+    image: "/img/product/22.webp",
+    price: 22,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345671"
+  },
+  {
+    name: "Quantum Raider",
+    image: "/img/product/23.png",
+    price: 46,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d1234567e"
+  },
+  {
+    name: "Talon Mech",
+    image: "/img/product/24.png",
+    price: 15,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345672"
+  },
+  {
+    name: "Tempest Enforcer",
+    image: "/img/product/25.webp",
+    price: 50,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d1234567f"
+  },
+  {
+    name: "Thunderbolt Z Prime",
+    image: "/img/product/1.png",
+    price: 37,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345680"
+  },
+  {
+    name: "Vortex Gamepad",
+    image: "/img/product/2.webp",
+    price: 12,
+    rating: 4,
+    reviews: 1,
+    status: true,
+    category: "68277c9f4e1a8f2d1234567d"
+  },
+  {
+    name: "Woo Luminous Singularity S6",
+    image: "/img/product/3.webp",
+    price: 44,
+    rating: 0,
+    reviews: 0,
+    status: true,
+    category: "68277c9f4e1a8f2d12345681"
+  }
 ];

@@ -27,7 +27,7 @@ export const ShopContent = () => {
                     minPrice: filters.priceRange[0],
                     maxPrice: filters.priceRange[1],
                     brands: filters.brands.join(','),
-                    sortBy: sortBy
+                    sortBy: sortBy === 'rating-low' ? 'default' : sortBy
                 };
                 const res = await api.get('/product', { params });
                 setProducts(res.data.data?.products || []);
@@ -49,8 +49,12 @@ export const ShopContent = () => {
     }, [filters, sortBy]);
 
     const displayProducts = useMemo(() => {
-        return products.slice(0, visibleCount);
-    }, [products, visibleCount]);
+        let sorted = [...products];
+        if (sortBy === 'rating-low') {
+            sorted.sort((a, b) => a.rating - b.rating);
+        }
+        return sorted.slice(0, visibleCount);
+    }, [products, visibleCount, sortBy]);
 
     const handleLoadMore = () => {
         setVisibleCount(prev => prev + 9);
